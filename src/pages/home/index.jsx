@@ -9,6 +9,7 @@ import { Lock, RefreshCw, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import HomepageSignup from "./HomepageSignup";
 
 function HomePage() {
   return (
@@ -25,42 +26,42 @@ function HomePage() {
           </div>
         </nav>
       </header>
-      <section className="max-w-[1440px] mx-auto p-2 flex justify-center gap-5 flex-col items-center h-[75vh]">
-        <h1 className="text-7xl text-primary font-bold mb-4">
+      <section className="max-w-[1440px] mx-auto p-2 flex justify-center gap-3 min-[1000px]:gap-5 flex-col items-center h-[60vh] sm:h-[75vh]">
+        <h1 className="text-3xl sm:text-5xl min-[1000px]:text-7xl text-primary font-bold">
           Secure Your Digital Life
         </h1>
-        <p className="text-2xl text-gray-400 font-normal w-1/2 text-center">
+        <p className="text-lg sm:text-xl min-[1000px]:text-2xl text-gray-400 font-normal sm:w-1/2 text-center">
           Manage all your passwords in one secure place. Stay protected with our
           Password Manager.
         </p>
         <div className="space-x-4">
-          <Button className="text-lg">Get Started</Button>
-          <Button variant="outline" className="text-lg ">
+          <Button className="min-[1000px]:text-lg">Get Started</Button>
+          <Button variant="outline" className="min-[1000px]:text-lg ">
             Learn More
           </Button>
         </div>
       </section>
       <section className="bg-gray-100 dark:bg-primary-foreground">
-        <div className="max-w-[1440px] mx-auto p-2 flex flex-col gap-16 items-center justify-center h-[55vh]">
-          <h1 className="text-6xl font-bold">Key Features</h1>
-          <div className="grid gap-12 sm:grid-cols-2 md:grid-cols-3">
-            <div className="flex flex-col items-center space-y-2 border-gray-800 p-4 rounded-lg">
-              <Lock className="h-8 w-8 mb-2" />
+        <div className="max-w-[1440px] mx-auto p-2 pb-5 flex flex-col gap-16 items-center justify-center min-h-[65vh]">
+          <h1 className="text-4xl mt-5 md:text-6xl font-bold">Key Features</h1>
+          <div className="grid gap-16 sm:grid-cols-2 md:grid-cols-3">
+            <div className="flex flex-col items-center space-y-2 border-gray-800 bg-secondary p-5 rounded-lg">
+              <Lock className="h-10 w-10 mb-2" />
               <h3 className="text-xl font-bold">Secure Encryption</h3>
-              <p className="text-base text-gray-500 dark:text-gray-400 text-center">
+              <p className="text-base text-gray-500 dark:text-gray-400  text-center">
                 Your data is protected with industry-leading encryption
                 technology.
               </p>
             </div>
-            <div className="flex flex-col items-center space-y-2 border-gray-800 p-4 rounded-lg">
-              <RefreshCw className="h-8 w-8 mb-2" />
+            <div className="flex flex-col items-center space-y-2 border-gray-800 bg-secondary p-5 rounded-lg">
+              <RefreshCw className="h-10 w-10 mb-2" />
               <h3 className="text-xl font-bold">Auto-Sync</h3>
               <p className="text-base text-gray-500 dark:text-gray-400 text-center">
                 Your passwords sync automatically across all your devices.
               </p>
             </div>
-            <div className="flex flex-col items-center space-y-2 border-gray-800 p-4 rounded-lg">
-              <Share2 className="h-8 w-8 mb-2" />
+            <div className="flex flex-col items-center space-y-2 border-gray-800 bg-secondary p-5 rounded-lg">
+              <Share2 className="h-10 w-10 mb-2" />
               <h3 className="text-xl font-bold">Secure Sharing</h3>
               <p className="text-base text-gray-500 dark:text-gray-400 text-center">
                 Share passwords securely with family members or colleagues.
@@ -69,29 +70,20 @@ function HomePage() {
           </div>
         </div>
       </section>
-      <section className=" max-w-[1440px] mx-auto h-[60vh] flex flex-col items-center justify-center space-y-4 text-center">
+      <section className=" max-w-[1440px] px-2 mx-auto h-[60vh] flex flex-col items-center justify-center space-y-4 text-center">
         <div className="space-y-2">
           <h2 className="text-3xl font-semibold  sm:text-5xl">
             Start Securing Your Passwords Today
           </h2>
-          <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-            Join thousands of users who trust SecurePass to manage their digital
-            lives. Sign up now and take control of your online security.
+          <p className="max-w-[900px] text-gray-500 sm:text-lg md:text-xl dark:text-gray-400">
+            Join thousands of users who trust Password Manager to manage their
+            digital lives. Sign up now and take control of your online security.
           </p>
         </div>
-        <div className="w-full max-w-sm space-y-2">
-          <form className="flex space-x-2">
-            <Input
-              className="max-w-lg flex-1"
-              placeholder="Enter your email"
-              type="email"
-            />
-            <Button type="submit">Sign Up</Button>
-          </form>
-        </div>
+        <HomepageSignup />
       </section>
       <footer className="border-t">
-        <section className="flex justify-between p-8 max-w-[1440px] mx-auto">
+        <section className="flex flex-col items-center gap-2 sm:flex-row justify-between p-8 max-w-[1440px] mx-auto">
           <p className="text-sm">
             © 2024 Password Manager. All rights reserved.
           </p>
