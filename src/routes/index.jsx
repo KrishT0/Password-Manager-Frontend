@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import { lazy } from "react";
 
 const HomePage = lazy(() => import("@/pages/home"));
+const AuthPage = lazy(() => import("@/pages/auth"));
 
 const routes = [
   {
@@ -10,7 +11,7 @@ const routes = [
   },
   {
     path: "/auth",
-    element: <h1>auth</h1>,
+    element: <AuthPage />,
   },
   {
     path: "/dashboard",
