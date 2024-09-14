@@ -6,10 +6,10 @@ import { Toaster } from "@/components/ui/toaster";
 
 function App() {
   return (
-      <Suspense fallback={<Loader />}>
-        <RouterProvider router={router} />
-        <Toaster />
-      </Suspense>
+    <Suspense fallback={<Loader />}>
+      <RouterProvider router={router} />
+      <Toaster duration="3000" />
+    </Suspense>
   );
 }
 

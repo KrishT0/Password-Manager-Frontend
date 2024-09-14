@@ -16,8 +16,10 @@ function HomepageSignup() {
     if (emailRegex.test(email)) {
       toast({
         title: "Success",
-        description: "Email is valid",
+        description:
+          "🎉 Congrats! You have successfully subscribed to our newsletter",
       });
+      setEmail("");
     } else {
       toast({
         title: "Error",
@@ -36,7 +38,7 @@ function HomepageSignup() {
         <Input
           className="max-w-lg flex-1"
           placeholder="Enter your email"
-          type="email"
+          type="text"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />

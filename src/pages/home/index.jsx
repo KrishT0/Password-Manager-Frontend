@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import HomeLayout from "@/layouts/HomeLayout";
 
 //lucid icon imports
@@ -6,7 +7,6 @@ import { Lock, RefreshCw, Share2 } from "lucide-react";
 
 //shadcn UI imports
 import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import HomepageSignup from "./HomepageSignup";
 
 function HomePage() {
@@ -15,12 +15,12 @@ function HomePage() {
       <header className="">
         <nav className="max-w-[1440px] mx-auto flex justify-between items-center p-2">
           <h1 className="text-lg font-semibold border p-1 rounded-full">PM</h1>
-          <div className="flex gap-3">
-            <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-          </div>
+          <Link
+            to="/auth"
+            className="text-muted-foreground hover:text-primary transition-all duration-200"
+          >
+            Login
+          </Link>
         </nav>
       </header>
       <section className="max-w-[1440px] mx-auto p-2 flex justify-center gap-3 min-[1000px]:gap-5 flex-col items-center h-[60vh] sm:h-[75vh]">
@@ -74,7 +74,7 @@ function HomePage() {
           </h2>
           <p className="max-w-[900px] text-lg sm:text-xl md:text-2xl text-gray-400">
             Join thousands of users who trust Password Manager to manage their
-            digital lives. Sign up now and take control of your online security.
+            digital lives. Subscribe to our newsletter and get regular updates.
           </p>
         </div>
         <HomepageSignup />
