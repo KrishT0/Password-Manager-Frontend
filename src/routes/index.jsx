@@ -3,6 +3,7 @@ import { lazy } from "react";
 
 const HomePage = lazy(() => import("@/pages/home"));
 const AuthPage = lazy(() => import("@/pages/auth"));
+const Dashboard = lazy(() => import("@/pages/dashboard"));
 
 const routes = [
   {
@@ -15,7 +16,7 @@ const routes = [
   },
   {
     path: "/dashboard",
-    element: <h1>dashboard</h1>,
+    element: <Dashboard />,
   },
 ];
 

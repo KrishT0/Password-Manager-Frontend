@@ -52,7 +52,7 @@ function SignIn() {
               <FormLabel htmlFor="email" className="pl-1">
                 Email
               </FormLabel>
-              <FormControl className="border">
+              <FormControl className="">
                 <Input
                   autoComplete="off"
                   id="email"
@@ -80,7 +80,7 @@ function SignIn() {
               <FormLabel htmlFor="masterKey" className="pl-1">
                 Master Key
               </FormLabel>
-              <FormControl>
+              <FormControl className="!mt-0">
                 <div className="relative">
                   <Input
                     id="masterKey"

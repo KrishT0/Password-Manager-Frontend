@@ -47,7 +47,7 @@ function SignUp() {
               <FormLabel htmlFor="name" className="pl-1">
                 Name
               </FormLabel>
-              <FormControl className="border">
+              <FormControl className="">
                 <Input
                   id="name"
                   autoComplete="off"
@@ -77,7 +77,7 @@ function SignUp() {
               <FormLabel htmlFor="email" className="pl-1">
                 Email
               </FormLabel>
-              <FormControl className="border">
+              <FormControl className="">
                 <Input
                   id="email"
                   autoComplete="off"
@@ -105,7 +105,7 @@ function SignUp() {
               <FormLabel htmlFor="masterKey" className="pl-1">
                 Master Key
               </FormLabel>
-              <FormControl>
+              <FormControl className="!mt-0">
                 <div className="relative">
                   <Input
                     id="masterKey"
