@@ -1,15 +1,26 @@
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState, useEffect, useRef } from "react";
 import {
   useReactTable,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
+  getPaginationRowModel,
 } from "@tanstack/react-table";
 
 //icon imports
-import { Settings, Pencil, Trash } from "lucide-react";
+import {
+  Settings,
+  Pencil,
+  Trash,
+  Copy,
+  ChevronRight,
+  ChevronsRight,
+  ChevronsLeft,
+  ChevronLeft,
+} from "lucide-react";
 
 //shadcn UI imports
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -25,8 +36,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import PasswordModal from "./PasswordModal";
 
 function PasswordTable({ searchQuery }) {
+  const dialogueOpenTriggerRef = useRef(null);
+  const [rowData, setRowData] = useState({});
+  const [rowId, setRowId] = useState("");
+
   const data = useMemo(
     () => [
       {
@@ -93,22 +109,38 @@ function PasswordTable({ searchQuery }) {
       cell: ({ row }) => (
         <DropdownMenu>
           <DropdownMenuTrigger>
-            <Settings size={20} />
+            <Settings size={18} />
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuItem
               className="flex gap-2 items-center cursor-pointer"
-              onClick={() => console.log("Edit:", row.original)}
+              onClick={() => {
+                setRowId("");
+                setRowData(row.original);
+                dialogueOpenTriggerRef.current.click();
+              }}
             >
               <Pencil size={15} />
               <p>Edit</p>
             </DropdownMenuItem>
             <DropdownMenuItem
               className="flex gap-2 items-center cursor-pointer"
-              onClick={() => console.log("Delete:", row.original.id)}
+              onClick={() => {
+                setRowId(row.original.id);
+                dialogueOpenTriggerRef.current.click();
+              }}
             >
               <Trash size={15} />
               <p>Delete</p>
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              className="flex gap-2 items-center cursor-pointer"
+              onClick={() =>
+                navigator.clipboard.writeText(row.original.password)
+              }
+            >
+              <Copy size={15} />
+              <p>Copy Password</p>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -121,57 +153,113 @@ function PasswordTable({ searchQuery }) {
     setGlobalFilter(searchQuery);
   }, [searchQuery]);
 
+  const [pagination, setPagination] = useState({
+    pageIndex: 0, //initial page index
+    pageSize: 3, //default page size
+  });
+
   const table = useReactTable({
     data,
     columns: columnDef,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
     state: {
       globalFilter,
+      pagination,
     },
     onGlobalFilterChange: setGlobalFilter,
+    onPaginationChange: setPagination,
   });
+
   const filteredRows = table.getRowModel().rows;
+
   return (
-    <Table>
-      <TableCaption>A list of your recent passwords.</TableCaption>
-      <TableHeader>
-        {table.getHeaderGroups().map((headerGroup) => (
-          <TableRow key={headerGroup.id}>
-            {headerGroup.headers.map((header) => (
-              <TableHead key={header.id}>
-                {flexRender(
-                  header.column.columnDef.header,
-                  header.getContext()
-                )}
-              </TableHead>
-            ))}
-          </TableRow>
-        ))}
-      </TableHeader>
-      <TableBody>
-        {filteredRows.length > 0 ? (
-          filteredRows.map((row) => (
-            <TableRow key={row.id}>
-              {row.getVisibleCells().map((cell) => (
-                <TableCell key={cell.id}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </TableCell>
+    <>
+      <Table>
+        <TableCaption>A list of your recent passwords.</TableCaption>
+        <TableHeader>
+          {table.getHeaderGroups().map((headerGroup) => (
+            <TableRow key={headerGroup.id}>
+              {headerGroup.headers.map((header) => (
+                <TableHead key={header.id}>
+                  {flexRender(
+                    header.column.columnDef.header,
+                    header.getContext()
+                  )}
+                </TableHead>
               ))}
             </TableRow>
-          ))
-        ) : (
-          <TableRow>
-            <TableCell
-              colSpan={table.getAllColumns().length}
-              className="text-center"
-            >
-              No matching results found
-            </TableCell>
-          </TableRow>
-        )}
-      </TableBody>
-    </Table>
+          ))}
+        </TableHeader>
+        <TableBody>
+          {filteredRows.length > 0 ? (
+            filteredRows.map((row) => (
+              <TableRow key={row.id}>
+                {row.getVisibleCells().map((cell) => (
+                  <TableCell key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))
+          ) : (
+            <TableRow>
+              <TableCell
+                colSpan={table.getAllColumns().length}
+                className="text-center"
+              >
+                No matching results found
+              </TableCell>
+            </TableRow>
+          )}
+        </TableBody>
+      </Table>
+      <div className="flex items-center gap-3 pr-5 w-full justify-end">
+        <Button
+          variant="outline"
+          className="p-[6px] h-8 w-8"
+          onClick={() => table.firstPage()}
+          disabled={!table.getCanPreviousPage()}
+        >
+          <ChevronsLeft />
+        </Button>
+        <Button
+          variant="outline"
+          className="p-[7px] h-8 w-8"
+          onClick={() => table.previousPage()}
+          disabled={!table.getCanPreviousPage()}
+        >
+          <ChevronLeft />
+        </Button>
+        <p className="text-sm">
+          {" "}
+          Page {table.getState().pagination.pageIndex + 1} of{" "}
+          {table.getPageCount()}
+        </p>
+        <Button
+          variant="outline"
+          className="p-[7px] h-8 w-8"
+          onClick={() => table.nextPage()}
+          disabled={!table.getCanNextPage()}
+        >
+          <ChevronRight />
+        </Button>
+        <Button
+          variant="outline"
+          className="p-[6px] h-8 w-8"
+          onClick={() => table.lastPage()}
+          disabled={!table.getCanNextPage()}
+        >
+          <ChevronsRight />
+        </Button>
+      </div>
+      <PasswordModal
+        ref={dialogueOpenTriggerRef}
+        data={rowData}
+        deleteFlag={rowId}
+      />
+    </>
   );
 }
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 //icon imports
 import { CirclePlus, Search } from "lucide-react";
@@ -7,9 +7,11 @@ import { CirclePlus, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import PasswordTable from "./PasswordTable";
+import PasswordModal from "./PasswordModal";
 
 function Dashboard() {
   const [searchQuery, setSearchQuery] = useState("");
+  const dialogueOpenTriggerRef = useRef(null);
 
   return (
     <div>
@@ -22,19 +24,27 @@ function Dashboard() {
             className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground"
           />
           <Input
+            id="search-website"
             placeholder="Search Website"
             className="pl-10"
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
         <Button>
-          <CirclePlus size={18} /> <p className="ml-2">Add Password</p>
+          <CirclePlus size={18} />{" "}
+          <p
+            className="ml-2"
+            onClick={() => dialogueOpenTriggerRef.current.click()}
+          >
+            Add Password
+          </p>
         </Button>
       </section>
 
       <section className="max-w-[1000px] mx-auto mt-5 border rounded-md">
         <PasswordTable searchQuery={searchQuery} />
       </section>
+      <PasswordModal ref={dialogueOpenTriggerRef} />
     </div>
   );
 }
