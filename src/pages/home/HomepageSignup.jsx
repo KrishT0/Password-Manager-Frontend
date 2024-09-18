@@ -42,7 +42,7 @@ function HomepageSignup() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <Button type="submit">Sign Up</Button>
+        <Button type="submit">Subscribe</Button>
       </form>
     </div>
   );
