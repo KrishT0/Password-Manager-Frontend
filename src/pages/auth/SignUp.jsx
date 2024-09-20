@@ -96,7 +96,7 @@ function SignUp() {
           rules={{
             required: "Please enter a master key",
             minLength: {
-              value: 8,
+              value: 6,
               message: "Master key must be at least 6 characters",
             },
           }}
