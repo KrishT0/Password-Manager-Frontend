@@ -154,8 +154,8 @@ function PasswordTable({ searchQuery }) {
   }, [searchQuery]);
 
   const [pagination, setPagination] = useState({
-    pageIndex: 0, //initial page index
-    pageSize: 3, //default page size
+    pageIndex: 0,
+    pageSize: 3,
   });
 
   const table = useReactTable({

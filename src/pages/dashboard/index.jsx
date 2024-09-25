@@ -14,7 +14,7 @@ function Dashboard() {
   const dialogueOpenTriggerRef = useRef(null);
 
   return (
-    <div>
+    <div className="px-1">
       <h1 className="text-4xl font-semibold text-center my-5">Dashboard</h1>
 
       <section className="max-w-[1000px] mx-auto flex gap-5 items-center justify-start mt-10">
