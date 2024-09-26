@@ -1,4 +1,5 @@
 import { useMemo, useState, useEffect, useRef } from "react";
+import { getPasswordsAPI } from "@/api";
 import {
   useReactTable,
   flexRender,
@@ -30,7 +31,6 @@ import {
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -42,52 +42,23 @@ function PasswordTable({ searchQuery }) {
   const dialogueOpenTriggerRef = useRef(null);
   const [rowData, setRowData] = useState({});
   const [rowId, setRowId] = useState("");
+  const[editId, setEditId] = useState("");
+  const [data, setData] = useState([]);
 
-  const data = useMemo(
-    () => [
-      {
-        id: 1,
-        link: "https://www.google.com",
-        name: "Google",
-        email: "example@gamil.com",
-        password: "password123",
-      },
-      {
-        id: 2,
-        link: "https://www.google.com",
-        name: "Facebook",
-        email: "example@gamil.com",
-        password: "password123",
-      },
-      {
-        id: 3,
-        link: "https://www.google.com",
-        name: "Yahoo",
-        email: "example@gamil.com",
-        password: "password123",
-      },
-      {
-        id: 4,
-        link: "https://www.google.com",
-        name: "Mtop",
-        email: "example@gamil.com",
-        password: "password123",
-      },
-      {
-        id: 5,
-        link: "https://www.google.com",
-        name: "TCS",
-        email: "example@gamil.com",
-        password: "password123",
-      },
-    ],
-    []
-  );
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await getPasswordsAPI();
+      setData(response.data);
+    };
+    fetchData();
+  }, []);
+
+  console.log(data);
 
   const columnDef = [
     {
       header: "Website Name",
-      accessorKey: "name",
+      accessorKey: "websiteName",
       cell: (row) => <div>{row.getValue()}</div>,
       enableGlobalFilter: true,
     },
@@ -116,6 +87,7 @@ function PasswordTable({ searchQuery }) {
               className="flex gap-2 items-center cursor-pointer"
               onClick={() => {
                 setRowId("");
+                setEditId(row.original._id);
                 setRowData(row.original);
                 dialogueOpenTriggerRef.current.click();
               }}
@@ -126,7 +98,7 @@ function PasswordTable({ searchQuery }) {
             <DropdownMenuItem
               className="flex gap-2 items-center cursor-pointer"
               onClick={() => {
-                setRowId(row.original.id);
+                setRowId(row.original._id);
                 dialogueOpenTriggerRef.current.click();
               }}
             >
@@ -155,7 +127,7 @@ function PasswordTable({ searchQuery }) {
 
   const [pagination, setPagination] = useState({
     pageIndex: 0,
-    pageSize: 3,
+    pageSize: 5,
   });
 
   const table = useReactTable({
@@ -177,7 +149,6 @@ function PasswordTable({ searchQuery }) {
   return (
     <>
       <Table>
-        <TableCaption>A list of your recent passwords.</TableCaption>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
@@ -215,7 +186,7 @@ function PasswordTable({ searchQuery }) {
           )}
         </TableBody>
       </Table>
-      <div className="flex items-center gap-3 pr-5 w-full justify-end">
+      <div className="flex items-center gap-3 pr-5 w-full justify-center">
         <Button
           variant="outline"
           className="p-[6px] h-8 w-8"
@@ -257,6 +228,7 @@ function PasswordTable({ searchQuery }) {
       <PasswordModal
         ref={dialogueOpenTriggerRef}
         data={rowData}
+        editFlag={editId}
         deleteFlag={rowId}
       />
     </>

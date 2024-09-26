@@ -1,5 +1,9 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { loginAPI } from "@/api";
+import { useToast } from "@/hooks/use-toast";
+import { useTokenStore } from "@/store/user";
 
 //icon imports
 import { Eye, EyeOff } from "lucide-react";
@@ -24,9 +28,22 @@ const initialValues = {
 function SignIn() {
   const form = useForm({ defaultValues: initialValues });
   const [showPassword, setShowPassword] = useState(false);
+  const { toast } = useToast();
+  const { setToken } = useTokenStore();
+  const navigate = useNavigate();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      const response = await loginAPI(data);
+      setToken(response.data.token);
+      navigate("/dashboard");
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: error.response.data.message,
+        variant: "destructive",
+      });
+    }
   };
 
   return (
