@@ -1,5 +1,10 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { signUpAPI } from "@/api";
+import { useTokenStore } from "@/store/user";
+import { useToast } from "@/hooks/use-toast";
+import SmallLoader from "@/components/custom/small-loader";
 
 //icon imports
 import { Eye, EyeOff } from "lucide-react";
@@ -17,7 +22,7 @@ import {
 } from "@/components/ui/form";
 
 const initialValues = {
-  name: "",
+  fullName: "",
   email: "",
   masterKey: "",
 };
@@ -25,9 +30,25 @@ const initialValues = {
 function SignUp() {
   const form = useForm({ defaultValues: initialValues });
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+  const { setToken } = useTokenStore();
+  const { toast } = useToast();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      const response = await signUpAPI(data);
+      setToken(response.data.token);
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 2000);
+    } catch (error) {
+      console.log(error);
+      toast({
+        title: "Error",
+        description: error.response.data.message,
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -38,7 +59,7 @@ function SignUp() {
       >
         <FormField
           control={form.control}
-          name="name"
+          name="fullName"
           rules={{
             required: "Please enter your name",
           }}
@@ -128,7 +149,7 @@ function SignUp() {
           )}
         />
         <Button className="w-2/4 mx-auto" type="submit">
-          Sign Up
+          {form.formState.isSubmitting ? <SmallLoader /> : "Sign Up"}
         </Button>
       </form>
     </Form>

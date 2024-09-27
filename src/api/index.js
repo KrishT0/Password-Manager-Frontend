@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useTokenStore } from "@/store/user";
 
-const baseURL = "http://localhost:3001/";
+const baseURL = import.meta.env.VITE_BASE_URL;
 const token = useTokenStore.getState().token;
 
 export const signUpAPI = async (data) => {

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { loginAPI } from "@/api";
 import { useToast } from "@/hooks/use-toast";
 import { useTokenStore } from "@/store/user";
+import SmallLoader from "@/components/custom/small-loader";
 
 //icon imports
 import { Eye, EyeOff } from "lucide-react";
@@ -36,7 +37,9 @@ function SignIn() {
     try {
       const response = await loginAPI(data);
       setToken(response.data.token);
-      navigate("/dashboard");
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 2000);
     } catch (error) {
       toast({
         title: "Error",
@@ -120,7 +123,7 @@ function SignIn() {
           )}
         />
         <Button className="w-2/4 mx-auto" type="submit">
-          Sign In
+          {form.formState.isSubmitting ? <SmallLoader /> : "Sign In"}
         </Button>
       </form>
     </Form>
