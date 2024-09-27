@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import HomeLayout from "@/layouts/HomeLayout";
+import { motion } from "framer-motion";
 
 //lucid icon imports
 import { Lock, RefreshCw, Share2 } from "lucide-react";
@@ -23,29 +24,53 @@ function HomePage() {
           </Link>
         </nav>
       </header>
-      <section className="max-w-[1440px] mx-auto p-2 flex justify-center gap-3 min-[1000px]:gap-5 flex-col items-center h-[60vh] sm:h-[75vh]">
-        <h1 className="text-3xl sm:text-5xl min-[1000px]:text-7xl text-primary font-bold">
+      <section className="max-w-[1440px] mx-auto p-2 flex justify-center gap-3 min-[1000px]:gap-5 flex-col items-center h-[60vh] sm:h-[85vh] relative">
+        <div className="absolute bg-blue-800 h-56 sm:h-64  md:h-96 aspect-square  rounded-full filter blur-[70px] sm:blur-[100px] md:blur-[130px] -z-10"></div>
+        <motion.h1
+          className="text-3xl sm:text-5xl min-[1000px]:text-7xl text-primary font-bold"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
           Secure Your Digital Life
-        </h1>
-        <p className="text-lg sm:text-xl min-[1000px]:text-2xl text-gray-400 font-normal sm:w-1/2 text-center">
+        </motion.h1>
+        <motion.p
+          className="text-lg sm:text-xl min-[1000px]:text-2xl font-normal sm:w-1/2 text-center"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
           Manage all your passwords in one secure place. Stay protected with our
           Password Manager.
-        </p>
-        <div className="space-x-4">
+        </motion.p>
+        <motion.div
+          className="space-x-4"
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
           <Button className="min-[1000px]:text-lg">Get Started</Button>
-          <Button variant="outline" className="min-[1000px]:text-lg ">
+          <Button variant="outline" className=" min-[1000px]:text-lg ">
             Learn More
           </Button>
-        </div>
+        </motion.div>
       </section>
-      <section className=" bg-primary-foreground">
+      <section className="">
         <div className="max-w-[1440px] mx-auto p-2 pb-5 flex flex-col gap-16 items-center justify-center min-h-[65vh]">
-          <h1 className="text-4xl mt-5 md:text-6xl font-bold">Key Features</h1>
+          <motion.h1
+            className="text-4xl mt-5 md:text-6xl font-bold"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            Key Features
+          </motion.h1>
           <div className="grid gap-16 sm:grid-cols-2 md:grid-cols-3">
-            <div className="flex flex-col items-center space-y-2 border-gray-800 bg-secondary p-5 rounded-lg">
+            <div className="flex flex-col items-center overflow-hidden space-y-2 border-gray-800 border p-5 rounded-lg relative">
+              {/* <div className="absolute blur-3xl -z-10 bg-yellow-500 aspect-square rounded-full h-40"></div> */}
               <Lock className="h-10 w-10 mb-2" />
               <h3 className="text-xl font-bold">Secure Encryption</h3>
-              <p className="text-lg text-gray-400  text-center">
+              <p className="text-lg   text-center">
                 Your data is protected with industry-leading encryption
                 technology.
               </p>
@@ -67,7 +92,8 @@ function HomePage() {
           </div>
         </div>
       </section>
-      <section className=" max-w-[1440px] px-2 mx-auto h-[60vh] flex flex-col items-center justify-center space-y-4 text-center">
+      <section className=" max-w-[1440px] px-2 mx-auto overflow-hidden h-[60vh] flex flex-col items-center justify-center space-y-4 text-center relative">
+        {/* <div className="absolute aspect-square w-60 rounded-full left-40 -z-10 fliter blur-[80px] bg-blue-600"></div> */}
         <div className="space-y-2">
           <h2 className="text-3xl font-semibold  sm:text-5xl">
             Start Securing Your Passwords Today
