@@ -1,4 +1,5 @@
-import { useMemo, useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { getPasswordsAPI } from "@/api";
 import {
   useReactTable,
@@ -42,13 +43,22 @@ function PasswordTable({ searchQuery }) {
   const dialogueOpenTriggerRef = useRef(null);
   const [rowData, setRowData] = useState({});
   const [rowId, setRowId] = useState("");
-  const[editId, setEditId] = useState("");
+  const [editId, setEditId] = useState("");
   const [data, setData] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await getPasswordsAPI();
-      setData(response.data);
+      try {
+        const response = await getPasswordsAPI();
+        setData(response.data);
+      } catch (err) {
+        const errorMessage = err.response.data.message;
+        if (errorMessage.includes("jwt")) {
+          localStorage.clear();
+          navigate("/");
+        }
+      }
     };
     fetchData();
   }, []);

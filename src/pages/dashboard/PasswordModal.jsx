@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, forwardRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { addPasswordAPI, deletePasswordAPI, editPasswordAPI } from "@/api";
 
@@ -32,6 +33,7 @@ const PasswordModal = forwardRef(
     const [showPassword, setShowPassword] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const dialogueCloseTriggerRef = useRef(null);
+    const navigate = useNavigate();
 
     const defaultValues = {
       websiteName: data?.websiteName || "",
@@ -53,7 +55,11 @@ const PasswordModal = forwardRef(
         }
         console.log(response);
       } catch (error) {
-        console.log(error);
+        const errorMessage = err.response.data.message;
+        if (errorMessage.includes("jwt")) {
+          localStorage.clear();
+          navigate("/");
+        }
       }
       dialogueCloseTriggerRef.current.click();
     };
@@ -68,7 +74,11 @@ const PasswordModal = forwardRef(
         const response = await deletePasswordAPI(deleteFlag);
         console.log(response);
       } catch (error) {
-        console.log(error);
+        const errorMessage = err.response.data.message;
+        if (errorMessage.includes("jwt")) {
+          localStorage.clear();
+          navigate("/");
+        }
       }
     };
 

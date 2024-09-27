@@ -65,43 +65,72 @@ function HomePage() {
           >
             Key Features
           </motion.h1>
-          <div className="grid gap-16 sm:grid-cols-2 md:grid-cols-3">
-            <div className="flex flex-col items-center overflow-hidden space-y-2 border-gray-800 border p-5 rounded-lg relative">
-              {/* <div className="absolute blur-3xl -z-10 bg-yellow-500 aspect-square rounded-full h-40"></div> */}
+          <div className="grid gap-16 sm:grid-cols-2 md:grid-cols-3 overflow-hidden">
+            <motion.div
+              className="flex flex-col items-center overflow-hidden space-y-2 border-gray-800 border p-5 rounded-lg relative"
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.5 }}
+            >
+              <div className="absolute blur-3xl -z-10 bg-yellow-900 aspect-square rounded-full h-44"></div>
               <Lock className="h-10 w-10 mb-2" />
               <h3 className="text-xl font-bold">Secure Encryption</h3>
               <p className="text-lg   text-center">
                 Your data is protected with industry-leading encryption
                 technology.
               </p>
-            </div>
-            <div className="flex flex-col items-center space-y-2 border-gray-800 bg-secondary p-5 rounded-lg">
+            </motion.div>
+            <motion.div
+              className="flex flex-col items-center overflow-hidden relative space-y-2 border border-gray-800  p-5 rounded-lg"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.5 }}
+            >
+              <div className="absolute blur-3xl -z-10 bg-yellow-900 aspect-square rounded-full h-44"></div>
               <RefreshCw className="h-10 w-10 mb-2" />
               <h3 className="text-xl font-bold">Auto-Sync</h3>
               <p className="text-lg text-gray-400 text-center">
                 Your passwords sync automatically across all your devices.
               </p>
-            </div>
-            <div className="flex flex-col items-center space-y-2 border-gray-800 bg-secondary p-5 rounded-lg">
+            </motion.div>
+            <motion.div
+              className="flex flex-col items-center overflow-hidden relative space-y-2 border-gray-800 border p-5 rounded-lg"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.5 }}
+            >
+              <div className="absolute blur-3xl -z-10 bg-yellow-900 aspect-square rounded-full h-44"></div>
               <Share2 className="h-10 w-10 mb-2" />
               <h3 className="text-xl font-bold">Secure Sharing</h3>
               <p className="text-lg text-gray-400 text-center">
                 Share passwords securely with family members or colleagues.
               </p>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
       <section className=" max-w-[1440px] px-2 mx-auto overflow-hidden h-[60vh] flex flex-col items-center justify-center space-y-4 text-center relative">
-        {/* <div className="absolute aspect-square w-60 rounded-full left-40 -z-10 fliter blur-[80px] bg-blue-600"></div> */}
+        <div className="absolute aspect-square w-60 rounded-full -bottom-32 -z-10 fliter blur-[80px] bg-blue-600"></div>
         <div className="space-y-2">
-          <h2 className="text-3xl font-semibold  sm:text-5xl">
+          <motion.h2
+            className="text-3xl font-semibold  sm:text-5xl"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
             Start Securing Your Passwords Today
-          </h2>
-          <p className="max-w-[900px] text-lg sm:text-xl md:text-2xl text-gray-400">
+          </motion.h2>
+          <motion.p className="max-w-[900px] text-lg sm:text-xl md:text-2xl text-gray-400"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
             Join thousands of users who trust Password Manager to manage their
             digital lives. Subscribe to our newsletter and get regular updates.
-          </p>
+          </motion.p>
         </div>
         <HomepageSignup />
       </section>
