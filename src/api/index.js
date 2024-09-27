@@ -1,8 +1,6 @@
 import axios from "axios";
-import { useTokenStore } from "@/store/user";
 
 const baseURL = import.meta.env.VITE_BASE_URL;
-const token = useTokenStore.getState().token;
 
 export const signUpAPI = async (data) => {
   const response = await axios.post(`${baseURL}auth/signup`, data);
@@ -15,6 +13,7 @@ export const loginAPI = async (data) => {
 };
 
 export const getPasswordsAPI = async () => {
+  const token = localStorage.getItem("token");
   const response = await axios.post(
     `${baseURL}password/get`,
     {},
@@ -28,6 +27,7 @@ export const getPasswordsAPI = async () => {
 };
 
 export const addPasswordAPI = async (data) => {
+  const token = localStorage.getItem("token");
   const response = await axios.post(`${baseURL}password/create`, data, {
     headers: {
       authorization: `Bearer ${token}`,
@@ -37,6 +37,7 @@ export const addPasswordAPI = async (data) => {
 };
 
 export const editPasswordAPI = async (data) => {
+  const token = localStorage.getItem("token");
   const response = await axios.patch(`${baseURL}password/edit`, data, {
     headers: {
       authorization: `Bearer ${token}`,
@@ -46,6 +47,7 @@ export const editPasswordAPI = async (data) => {
 };
 
 export const deletePasswordAPI = async (id) => {
+  const token = localStorage.getItem("token");
   console.log(id);
   const response = await axios.delete(`${baseURL}password/delete`, {
     headers: {

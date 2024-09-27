@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { loginAPI } from "@/api";
 import { useToast } from "@/hooks/use-toast";
-import { useTokenStore } from "@/store/user";
 import SmallLoader from "@/components/custom/small-loader";
 
 //icon imports
@@ -30,13 +29,12 @@ function SignIn() {
   const form = useForm({ defaultValues: initialValues });
   const [showPassword, setShowPassword] = useState(false);
   const { toast } = useToast();
-  const { setToken } = useTokenStore();
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     try {
       const response = await loginAPI(data);
-      setToken(response.data.token);
+      localStorage.setItem("token", response.data.token);
       setTimeout(() => {
         navigate("/dashboard");
       }, 2000);

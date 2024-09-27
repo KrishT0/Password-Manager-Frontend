@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { signUpAPI } from "@/api";
-import { useTokenStore } from "@/store/user";
 import { useToast } from "@/hooks/use-toast";
 import SmallLoader from "@/components/custom/small-loader";
 
@@ -31,13 +30,12 @@ function SignUp() {
   const form = useForm({ defaultValues: initialValues });
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-  const { setToken } = useTokenStore();
   const { toast } = useToast();
 
   const onSubmit = async (data) => {
     try {
       const response = await signUpAPI(data);
-      setToken(response.data.token);
+      localStorage.setItem("token", response.data.token);
       setTimeout(() => {
         navigate("/dashboard");
       }, 2000);
