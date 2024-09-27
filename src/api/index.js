@@ -48,7 +48,6 @@ export const editPasswordAPI = async (data) => {
 
 export const deletePasswordAPI = async (id) => {
   const token = localStorage.getItem("token");
-  console.log(id);
   const response = await axios.delete(`${baseURL}password/delete`, {
     headers: {
       authorization: `Bearer ${token}`,

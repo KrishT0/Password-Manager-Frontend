@@ -54,7 +54,7 @@ function PasswordTable({ searchQuery }) {
         setData(response.data);
       } catch (err) {
         const errorMessage = err.response.data.message;
-        if (errorMessage.includes("jwt")) {
+        if (errorMessage.includes("jwt") || errorMessage.includes("login")) {
           localStorage.clear();
           navigate("/");
         }
@@ -63,7 +63,6 @@ function PasswordTable({ searchQuery }) {
     fetchData();
   }, []);
 
-  console.log(data);
 
   const columnDef = [
     {

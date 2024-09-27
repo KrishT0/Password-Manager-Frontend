@@ -38,7 +38,6 @@ function SignUp() {
       localStorage.setItem("token", response.data.token);
       navigate("/dashboard");
     } catch (error) {
-      console.log(error);
       toast({
         title: "Error",
         description: error.response.data.message,

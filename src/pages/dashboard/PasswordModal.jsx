@@ -33,6 +33,7 @@ const PasswordModal = forwardRef(
     const [showPassword, setShowPassword] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const dialogueCloseTriggerRef = useRef(null);
+    const deleteDialogueCloseTriggerRef = useRef(null);
     const navigate = useNavigate();
 
     const defaultValues = {
@@ -53,10 +54,9 @@ const PasswordModal = forwardRef(
           const body = { ...data, _id: editFlag };
           response = await editPasswordAPI(body);
         }
-        console.log(response);
       } catch (error) {
         const errorMessage = err.response.data.message;
-        if (errorMessage.includes("jwt")) {
+        if (errorMessage.includes("jwt") || errorMessage.includes("login")) {
           localStorage.clear();
           navigate("/");
         }
@@ -69,13 +69,12 @@ const PasswordModal = forwardRef(
     }, [data]);
 
     const handleDeletePassword = async () => {
-      console.log("Delete password", deleteFlag);
       try {
-        const response = await deletePasswordAPI(deleteFlag);
-        console.log(response);
+        await deletePasswordAPI(deleteFlag);
+        deleteDialogueCloseTriggerRef.current.click();
       } catch (error) {
-        const errorMessage = err.response.data.message;
-        if (errorMessage.includes("jwt")) {
+        const errorMessage = error.response.data.message;
+        if (errorMessage.includes("jwt") || errorMessage.includes("login")) {
           localStorage.clear();
           navigate("/");
         }
@@ -121,7 +120,10 @@ const PasswordModal = forwardRef(
                   <Button variant="destructive" onClick={handleDeletePassword}>
                     Delete
                   </Button>
-                  <AlertDialogAction className="w-fit inline-block">
+                  <AlertDialogAction
+                    ref={deleteDialogueCloseTriggerRef}
+                    className="w-fit inline-block"
+                  >
                     Cancel
                   </AlertDialogAction>
                 </div>
@@ -238,6 +240,8 @@ const PasswordModal = forwardRef(
                         <div className="animate-spin">
                           <LoaderCircle size={20} />
                         </div>
+                      ) : editFlag ? (
+                        "Edit Password"
                       ) : (
                         "Add Password"
                       )}
