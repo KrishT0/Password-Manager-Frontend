@@ -97,7 +97,9 @@ const PasswordModal = forwardRef(
           </AlertDialogHeader>
           <AlertDialogFooter
             className={`${
-              !deleteFlag && "flex !flex-col justify-center items-center gap-2"
+              deleteFlag
+                ? " flex flex-col "
+                : "flex !flex-col justify-center items-center gap-2"
             }`}
           >
             {deleteFlag ? (
@@ -105,10 +107,14 @@ const PasswordModal = forwardRef(
                 <AlertDialogDescription>
                   Are you sure you want to delete this password?
                 </AlertDialogDescription>
-                <Button variant="destructive" onClick={handleDeletePassword}>
-                  Delete
-                </Button>
-                <AlertDialogAction>Cancel</AlertDialogAction>
+                <div className="flex mt-2 gap-3">
+                  <Button variant="destructive" onClick={handleDeletePassword}>
+                    Delete
+                  </Button>
+                  <AlertDialogAction className="w-fit inline-block">
+                    Cancel
+                  </AlertDialogAction>
+                </div>
               </>
             ) : (
               <>

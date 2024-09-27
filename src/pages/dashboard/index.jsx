@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 //icon imports
 import { CirclePlus, Search } from "lucide-react";
@@ -12,11 +13,27 @@ import PasswordModal from "./PasswordModal";
 function Dashboard() {
   const [searchQuery, setSearchQuery] = useState("");
   const dialogueOpenTriggerRef = useRef(null);
+  const navigate = useNavigate();
+
+  const onLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/");
+  };
 
   return (
     <div className="px-1">
-      <h1 className="text-4xl font-semibold text-center my-5">Dashboard</h1>
-
+      <div className="relative ">
+        <h1 className="text-xl sm:text-2xl md:text-4xl font-semibold text-center my-3 sm:my-5">
+          Dashboard
+        </h1>
+        <Button
+          variant="ghost"
+          className="absolute sm:-top-1 sm:right-5 right-1 -top-2"
+          onClick={onLogout}
+        >
+          Logout
+        </Button>
+      </div>
       <section className="max-w-[1000px] mx-auto flex gap-5 items-center justify-start mt-10">
         <div className="relative w-[400px]">
           <Search

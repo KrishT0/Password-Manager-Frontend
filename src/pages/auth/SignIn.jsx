@@ -35,9 +35,7 @@ function SignIn() {
     try {
       const response = await loginAPI(data);
       localStorage.setItem("token", response.data.token);
-      setTimeout(() => {
-        navigate("/dashboard");
-      }, 2000);
+      navigate("/dashboard");
     } catch (error) {
       toast({
         title: "Error",
