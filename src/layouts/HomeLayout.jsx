@@ -1,12 +1,12 @@
 import React from "react";
-
+import { Analytics } from "@vercel/analytics/react";
 
 function HomeLayout({ children }) {
   return (
-    <div className="">
-      
-      {children}
-    </div>
+    <>
+      <Analytics />
+      <div className="">{children}</div>
+    </>
   );
 }
 
