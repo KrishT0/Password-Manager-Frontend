@@ -39,13 +39,15 @@ import {
 } from "@/components/ui/table";
 import PasswordModal from "./PasswordModal";
 
-function PasswordTable({ searchQuery }) {
+function PasswordTable({ searchQuery, refetchChild }) {
   const dialogueOpenTriggerRef = useRef(null);
   const [rowData, setRowData] = useState({});
   const [rowId, setRowId] = useState("");
   const [editId, setEditId] = useState("");
   const [data, setData] = useState([]);
+  const [refetch, setRefetch] = useState(false);
   const navigate = useNavigate();
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -61,8 +63,7 @@ function PasswordTable({ searchQuery }) {
       }
     };
     fetchData();
-  }, []);
-
+  }, [refetch, refetchChild]);
 
   const columnDef = [
     {
@@ -239,6 +240,7 @@ function PasswordTable({ searchQuery }) {
         data={rowData}
         editFlag={editId}
         deleteFlag={rowId}
+        setRefetch={setRefetch}
       />
     </>
   );

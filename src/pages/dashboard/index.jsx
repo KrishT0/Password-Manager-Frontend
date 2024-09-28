@@ -12,6 +12,7 @@ import PasswordModal from "./PasswordModal";
 
 function Dashboard() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [refetchChild, setRefetchChild] = useState(false);
   const dialogueOpenTriggerRef = useRef(null);
   const navigate = useNavigate();
 
@@ -53,9 +54,13 @@ function Dashboard() {
       </section>
 
       <section className="max-w-[1000px] mx-auto mt-5 border rounded-md">
-        <PasswordTable searchQuery={searchQuery} />
+        <PasswordTable searchQuery={searchQuery} refetchChild={refetchChild} />
       </section>
-      <PasswordModal ref={dialogueOpenTriggerRef} addFlag={true} />
+      <PasswordModal
+        ref={dialogueOpenTriggerRef}
+        addFlag={true}
+        setRefetchChild={setRefetchChild}
+      />
     </div>
   );
 }

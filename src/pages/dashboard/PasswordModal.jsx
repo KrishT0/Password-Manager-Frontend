@@ -8,6 +8,7 @@ import { Eye, EyeOff, CircleX, LoaderCircle } from "lucide-react";
 
 //shadcn UI imports
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -26,12 +27,13 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
 
 const PasswordModal = forwardRef(
-  ({ data, deleteFlag, addFlag, editFlag }, ref) => {
+  (
+    { data, deleteFlag, addFlag, editFlag, setRefetch, setRefetchChild },
+    ref
+  ) => {
     const [showPassword, setShowPassword] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
     const dialogueCloseTriggerRef = useRef(null);
     const deleteDialogueCloseTriggerRef = useRef(null);
     const navigate = useNavigate();
@@ -45,17 +47,18 @@ const PasswordModal = forwardRef(
     const form = useForm({ defaultValues });
 
     const onSubmitData = async (data) => {
-      setIsLoading(true);
       try {
-        let response;
         if (addFlag) {
-          response = await addPasswordAPI(data);
+          await addPasswordAPI(data);
+          form.reset(defaultValues);
+          setRefetchChild((prev) => !prev);
         } else {
           const body = { ...data, _id: editFlag };
-          response = await editPasswordAPI(body);
+          await editPasswordAPI(body);
+          setRefetch((prev) => !prev);
         }
       } catch (error) {
-        const errorMessage = err.response.data.message;
+        const errorMessage = error.response.data.message;
         if (errorMessage.includes("jwt") || errorMessage.includes("login")) {
           localStorage.clear();
           navigate("/");
@@ -71,6 +74,7 @@ const PasswordModal = forwardRef(
     const handleDeletePassword = async () => {
       try {
         await deletePasswordAPI(deleteFlag);
+        setRefetch((prev) => !prev);
         deleteDialogueCloseTriggerRef.current.click();
       } catch (error) {
         const errorMessage = error.response.data.message;
@@ -236,7 +240,7 @@ const PasswordModal = forwardRef(
                       )}
                     />
                     <Button className="w-2/4 mx-auto" type="submit">
-                      {isLoading ? (
+                      {form.formState.isSubmitting ? (
                         <div className="animate-spin">
                           <LoaderCircle size={20} />
                         </div>
