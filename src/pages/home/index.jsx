@@ -1,14 +1,13 @@
-import React from "react";
 import { Link } from "react-router-dom";
-import HomeLayout from "@/layouts/HomeLayout";
 import { motion } from "framer-motion";
+import HomeLayout from "@/layouts/HomeLayout";
+import HomepageSignup from "./HomepageSignup";
 
 //lucid icon imports
 import { Lock, RefreshCw, Share2 } from "lucide-react";
 
 //shadcn UI imports
 import { Button } from "@/components/ui/button";
-import HomepageSignup from "./HomepageSignup";
 
 function HomePage() {
   return (
@@ -49,9 +48,11 @@ function HomePage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
-          <Button className="min-[1000px]:text-lg">Get Started</Button>
+          <Button className="min-[1000px]:text-lg">
+            <Link to="/auth">Get Started</Link>
+          </Button>
           <Button variant="outline" className=" min-[1000px]:text-lg ">
-            Learn More
+            <Link to="/auth">Learn More</Link>
           </Button>
         </motion.div>
       </section>
@@ -123,7 +124,8 @@ function HomePage() {
           >
             Start Securing Your Passwords Today
           </motion.h2>
-          <motion.p className="max-w-[900px] text-lg sm:text-xl md:text-2xl text-gray-400"
+          <motion.p
+            className="max-w-[900px] text-lg sm:text-xl md:text-2xl text-gray-400"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}

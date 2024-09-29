@@ -48,7 +48,6 @@ function PasswordTable({ searchQuery, refetchChild }) {
   const [refetch, setRefetch] = useState(false);
   const navigate = useNavigate();
 
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -137,7 +136,7 @@ function PasswordTable({ searchQuery, refetchChild }) {
 
   const [pagination, setPagination] = useState({
     pageIndex: 0,
-    pageSize: 5,
+    pageSize: 7,
   });
 
   const table = useReactTable({
