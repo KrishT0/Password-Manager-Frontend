@@ -15,6 +15,7 @@ import {
   Pencil,
   Trash,
   Copy,
+  ExternalLink,
   ChevronRight,
   ChevronsRight,
   ChevronsLeft,
@@ -68,7 +69,22 @@ function PasswordTable({ searchQuery, refetchChild }) {
     {
       header: "Website Name",
       accessorKey: "websiteName",
-      cell: (row) => <div>{row.getValue()}</div>,
+      cell: (row) => (
+        <div className="flex gap-1 cursor-pointer items-center">
+          <a
+            href={`${row.getValue()}`}
+            target="_blank"
+            className="underline truncate w-36"
+          >
+            {row.getValue()}
+          </a>
+          <ExternalLink
+            size={15}
+            className="cursor-pointer"
+            onClick={() => navigator.clipboard.writeText(row.getValue())}
+          />
+        </div>
+      ),
       enableGlobalFilter: true,
     },
     {
@@ -122,6 +138,13 @@ function PasswordTable({ searchQuery, refetchChild }) {
             >
               <Copy size={15} />
               <p>Copy Password</p>
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              className="flex gap-2 items-center cursor-pointer"
+              onClick={() => navigator.clipboard.writeText(row.original.email)}
+            >
+              <Copy size={15} />
+              <p>Copy email</p>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
