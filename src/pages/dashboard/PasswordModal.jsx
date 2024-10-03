@@ -261,4 +261,6 @@ const PasswordModal = forwardRef(
   }
 );
 
+PasswordModal.displayName = "PasswordModal";
+
 export default PasswordModal;

@@ -1,4 +1,3 @@
-import React from "react";
 
 //shadcn Ui imports
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";

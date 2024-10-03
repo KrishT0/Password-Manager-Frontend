@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 
 //shadcn UI imports
