@@ -78,11 +78,7 @@ function PasswordTable({ searchQuery, refetchChild }) {
           >
             {row.getValue()}
           </a>
-          <ExternalLink
-            size={15}
-            className="cursor-pointer"
-            onClick={() => navigator.clipboard.writeText(row.getValue())}
-          />
+          <ExternalLink size={15} className="cursor-pointer" />
         </div>
       ),
       enableGlobalFilter: true,
