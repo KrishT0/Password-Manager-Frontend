@@ -57,6 +57,14 @@ function SignUp() {
           name="fullName"
           rules={{
             required: "Please enter your name",
+            minLength: {
+              value: 3,
+              message: "Full name must be at least 3 characters",
+            },
+            maxLength: {
+              value: 50,
+              message: "Full name must not exceed 50 characters",
+            },
           }}
           render={({ field }) => (
             <FormItem>
