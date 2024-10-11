@@ -55,8 +55,13 @@ function PasswordTable({ searchQuery, refetchChild }) {
         const response = await getPasswordsAPI();
         setData(response.data);
       } catch (err) {
+        console.log(err.response);
         const errorMessage = err.response.data.message;
-        if (errorMessage.includes("jwt") || errorMessage.includes("login")) {
+        if (
+          errorMessage.includes("jwt") ||
+          errorMessage.includes("login") ||
+          errorMessage.includes("exist")
+        ) {
           localStorage.clear();
           navigate("/");
         }

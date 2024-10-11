@@ -59,7 +59,11 @@ const PasswordModal = forwardRef(
         }
       } catch (error) {
         const errorMessage = error.response.data.message;
-        if (errorMessage.includes("jwt") || errorMessage.includes("login")) {
+        if (
+          errorMessage.includes("jwt") ||
+          errorMessage.includes("login") ||
+          errorMessage.includes("exist")
+        ) {
           localStorage.clear();
           navigate("/");
         }
@@ -78,7 +82,11 @@ const PasswordModal = forwardRef(
         deleteDialogueCloseTriggerRef.current.click();
       } catch (error) {
         const errorMessage = error.response.data.message;
-        if (errorMessage.includes("jwt") || errorMessage.includes("login")) {
+        if (
+          errorMessage.includes("jwt") ||
+          errorMessage.includes("login") ||
+          errorMessage.includes("exist")
+        ) {
           localStorage.clear();
           navigate("/");
         }
