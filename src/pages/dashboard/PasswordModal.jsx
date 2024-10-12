@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, forwardRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { addPasswordAPI, deletePasswordAPI, editPasswordAPI } from "@/api";
+import { useToast } from "@/hooks/use-toast";
 
 //icon imports
 import { Eye, EyeOff, CircleX, LoaderCircle } from "lucide-react";
@@ -37,6 +38,7 @@ const PasswordModal = forwardRef(
     const dialogueCloseTriggerRef = useRef(null);
     const deleteDialogueCloseTriggerRef = useRef(null);
     const navigate = useNavigate();
+    const { toast } = useToast();
 
     const defaultValues = {
       websiteName: data?.websiteName || "",
@@ -59,11 +61,17 @@ const PasswordModal = forwardRef(
         }
       } catch (error) {
         const errorMessage = error.response.data.message;
+        console.log(errorMessage);
         if (
           errorMessage.includes("jwt") ||
           errorMessage.includes("login") ||
           errorMessage.includes("exist")
         ) {
+          toast({
+            title: "Error",
+            description: errorMessage,
+            variant: "destructive",
+          });
           localStorage.clear();
           navigate("/");
         }
@@ -87,6 +95,11 @@ const PasswordModal = forwardRef(
           errorMessage.includes("login") ||
           errorMessage.includes("exist")
         ) {
+          toast({
+            title: "Error",
+            description: errorMessage,
+            variant: "destructive",
+          });
           localStorage.clear();
           navigate("/");
         }

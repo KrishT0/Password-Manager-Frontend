@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { getPasswordsAPI } from "@/api";
+import { useToast } from "@/hooks/use-toast";
 import {
   useReactTable,
   flexRender,
@@ -48,6 +49,7 @@ function PasswordTable({ searchQuery, refetchChild }) {
   const [data, setData] = useState([]);
   const [refetch, setRefetch] = useState(false);
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -55,13 +57,17 @@ function PasswordTable({ searchQuery, refetchChild }) {
         const response = await getPasswordsAPI();
         setData(response.data);
       } catch (err) {
-        console.log(err.response);
         const errorMessage = err.response.data.message;
         if (
           errorMessage.includes("jwt") ||
           errorMessage.includes("login") ||
           errorMessage.includes("exist")
         ) {
+          toast({
+            title: "Error",
+            description: errorMessage,
+            variant: "destructive",
+          });
           localStorage.clear();
           navigate("/");
         }
