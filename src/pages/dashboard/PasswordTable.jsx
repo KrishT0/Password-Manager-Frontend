@@ -85,11 +85,11 @@ function PasswordTable({ searchQuery, refetchChild }) {
           <a
             href={`${row.getValue()}`}
             target="_blank"
-            className="underline truncate w-36"
+            className=" flex gap-1 cursor-pointer items-center underline "
           >
-            {row.getValue()}
+            <span className="truncate w-40">{row.getValue()}</span>
+            <ExternalLink size={15} className="cursor-pointer" />
           </a>
-          <ExternalLink size={15} className="cursor-pointer" />
         </div>
       ),
       enableGlobalFilter: true,
@@ -114,7 +114,7 @@ function PasswordTable({ searchQuery, refetchChild }) {
           <DropdownMenuTrigger>
             <Settings size={18} />
           </DropdownMenuTrigger>
-          <DropdownMenuContent>
+          <DropdownMenuContent collisionPadding={5}>
             <DropdownMenuItem
               className="flex gap-2 items-center cursor-pointer"
               onClick={() => {
