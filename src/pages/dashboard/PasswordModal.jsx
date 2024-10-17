@@ -54,10 +54,18 @@ const PasswordModal = forwardRef(
           await addPasswordAPI(data);
           form.reset(defaultValues);
           setRefetchChild((prev) => !prev);
+          toast({
+            title: "Success",
+            description: "Password added successfully",
+          });
         } else {
           const body = { ...data, _id: editFlag };
           await editPasswordAPI(body);
           setRefetch((prev) => !prev);
+          toast({
+            title: "Success",
+            description: "Password edited successfully",
+          });
         }
       } catch (error) {
         const errorMessage = error.response.data.message;
