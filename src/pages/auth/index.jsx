@@ -7,7 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 function AuthPage() {
   return (
-    <div className="flex h-screen w-screen justify-center items-center px-1">
+    <div className="relative flex h-screen w-screen justify-center items-center px-1">
       <GridPattern
         width={25}
         height={25}
