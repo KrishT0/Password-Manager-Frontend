@@ -31,7 +31,15 @@ import {
 
 const PasswordModal = forwardRef(
   (
-    { data, deleteFlag, addFlag, editFlag, setRefetch, setRefetchChild },
+    {
+      data,
+      setData,
+      deleteFlag,
+      addFlag,
+      editFlag,
+      setRefetch,
+      setRefetchChild,
+    },
     ref
   ) => {
     const [showPassword, setShowPassword] = useState(false);
@@ -69,20 +77,20 @@ const PasswordModal = forwardRef(
         }
       } catch (error) {
         const errorMessage = error.response.data.message;
-        console.log(errorMessage);
         if (
           errorMessage.includes("jwt") ||
           errorMessage.includes("login") ||
           errorMessage.includes("exist")
         ) {
-          toast({
-            title: "Error",
-            description: errorMessage,
-            variant: "destructive",
-          });
           localStorage.clear();
           navigate("/");
         }
+        setData({ websiteName: "", email: "", password: "" });
+        toast({
+          title: "Error",
+          description: errorMessage,
+          variant: "destructive",
+        });
       }
       dialogueCloseTriggerRef.current.click();
     };
@@ -114,6 +122,11 @@ const PasswordModal = forwardRef(
       }
     };
 
+    const closeModal = () => {
+      setData({ websiteName: "", email: "", password: "" });
+      dialogueCloseTriggerRef.current.click();
+    };
+
     return (
       <AlertDialog>
         <AlertDialogTrigger ref={ref}></AlertDialogTrigger>
@@ -130,10 +143,7 @@ const PasswordModal = forwardRef(
                 >
                   Close
                 </AlertDialogAction>
-                <CircleX
-                  className="cursor-pointer"
-                  onClick={() => dialogueCloseTriggerRef.current.click()}
-                />
+                <CircleX className="cursor-pointer" onClick={closeModal} />
               </>
             )}
           </AlertDialogHeader>
@@ -246,6 +256,7 @@ const PasswordModal = forwardRef(
                             <div className="relative">
                               <Input
                                 id="password"
+                                autoComplete="off"
                                 placeholder="Password"
                                 {...field}
                                 className="!mt-0 pr-10"

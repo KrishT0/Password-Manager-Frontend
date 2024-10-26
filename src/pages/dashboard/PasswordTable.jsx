@@ -267,6 +267,7 @@ function PasswordTable({ searchQuery, refetchChild }) {
       <PasswordModal
         ref={dialogueOpenTriggerRef}
         data={rowData}
+        setData={setRowData}
         editFlag={editId}
         deleteFlag={rowId}
         setRefetch={setRefetch}
