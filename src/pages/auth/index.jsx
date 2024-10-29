@@ -15,7 +15,7 @@ function AuthPage() {
         x={-1}
         y={-1}
         strokeDasharray={"5 4"}
-        className="[mask-image:radial-gradient(600px_circle_at_center,white,transparent)]"
+        className="[mask-image:radial-gradient(500px_circle_at_center,white,transparent)]"
       />
       <Tabs defaultValue="sign-in" className="w-[450px] z-10">
         <TabsList className="w-full">
