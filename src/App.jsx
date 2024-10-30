@@ -4,6 +4,7 @@ import router from "@/routes";
 import Loader from "./components/custom/loader";
 import { Toaster } from "@/components/ui/toaster";
 import { SpeedInsights } from "@vercel/speed-insights/react";
+import { Analytics } from "@vercel/analytics/react";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <RouterProvider router={router} />
       <Toaster duration="3000" />
       <SpeedInsights />
+      <Analytics />
     </Suspense>
   );
 }
