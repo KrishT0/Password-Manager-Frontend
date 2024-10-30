@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import HomeLayout from "@/layouts/HomeLayout";
-import HomepageSignup from "./HomepageSignup";
+import HomepageSignup from "@/pages/home/HomepageSignup";
 
 //lucid icon imports
 import { Lock, RefreshCw, Share2 } from "lucide-react";
@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 function HomePage() {
   return (
     <HomeLayout>
-      <header className="">
+      <header>
         <nav className="max-w-[1440px] mx-auto flex justify-between items-center p-2">
           <h1 className="text-lg font-semibold border p-1 rounded-full">PM</h1>
           <Link
@@ -56,61 +56,59 @@ function HomePage() {
           </Button>
         </motion.div>
       </section>
-      <section className="">
-        <div className="max-w-[1440px] mx-auto p-2 pb-5 flex flex-col gap-16 items-center justify-center min-h-[65vh]">
-          <motion.h1
-            className="text-4xl mt-5 md:text-6xl font-bold"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
+      <section className="max-w-[1440px] mx-auto p-2 pb-5 flex flex-col overflow-hidden gap-16 items-center justify-center my-20">
+        <motion.h1
+          className="text-4xl mt-5 md:text-6xl font-bold"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          Key Features
+        </motion.h1>
+        <div className="grid gap-16 sm:grid-cols-2 md:grid-cols-3 ">
+          <motion.div
+            className="flex flex-col items-center overflow-hidden space-y-2 border-gray-800 border p-5 rounded-lg relative"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.5 }}
           >
-            Key Features
-          </motion.h1>
-          <div className="grid gap-16 sm:grid-cols-2 md:grid-cols-3 overflow-hidden">
-            <motion.div
-              className="flex flex-col items-center overflow-hidden space-y-2 border-gray-800 border p-5 rounded-lg relative"
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.5 }}
-            >
-              <div className="absolute blur-3xl -z-10 bg-yellow-900 aspect-square rounded-full h-44"></div>
-              <Lock className="h-10 w-10 mb-2" />
-              <h3 className="text-xl font-bold">Secure Encryption</h3>
-              <p className="text-lg   text-center">
-                Your data is protected with industry-leading encryption
-                technology.
-              </p>
-            </motion.div>
-            <motion.div
-              className="flex flex-col items-center overflow-hidden relative space-y-2 border border-gray-800  p-5 rounded-lg"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.5 }}
-            >
-              <div className="absolute blur-3xl -z-10 bg-yellow-900 aspect-square rounded-full h-44"></div>
-              <RefreshCw className="h-10 w-10 mb-2" />
-              <h3 className="text-xl font-bold">Auto-Sync</h3>
-              <p className="text-lg text-gray-400 text-center">
-                Your passwords sync automatically across all your devices.
-              </p>
-            </motion.div>
-            <motion.div
-              className="flex flex-col items-center overflow-hidden relative space-y-2 border-gray-800 border p-5 rounded-lg"
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.5 }}
-            >
-              <div className="absolute blur-3xl -z-10 bg-yellow-900 aspect-square rounded-full h-44"></div>
-              <Share2 className="h-10 w-10 mb-2" />
-              <h3 className="text-xl font-bold">Secure Sharing</h3>
-              <p className="text-lg text-gray-400 text-center">
-                Share passwords securely with family members or colleagues.
-              </p>
-            </motion.div>
-          </div>
+            <div className="absolute blur-3xl -z-10 bg-yellow-900 aspect-square rounded-full h-44"></div>
+            <Lock className="h-10 w-10 mb-2" />
+            <h3 className="text-xl font-bold">Secure Encryption</h3>
+            <p className="text-lg   text-center">
+              Your data is protected with industry-leading encryption
+              technology.
+            </p>
+          </motion.div>
+          <motion.div
+            className="flex flex-col items-center overflow-hidden relative space-y-2 border border-gray-800  p-5 rounded-lg"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="absolute blur-3xl -z-10 bg-yellow-900 aspect-square rounded-full h-44"></div>
+            <RefreshCw className="h-10 w-10 mb-2" />
+            <h3 className="text-xl font-bold">Auto-Sync</h3>
+            <p className="text-lg text-gray-400 text-center">
+              Your passwords sync automatically across all your devices.
+            </p>
+          </motion.div>
+          <motion.div
+            className="flex flex-col items-center overflow-hidden relative space-y-2 border-gray-800 border p-5 rounded-lg"
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="absolute blur-3xl -z-10 bg-yellow-900 aspect-square rounded-full h-44"></div>
+            <Share2 className="h-10 w-10 mb-2" />
+            <h3 className="text-xl font-bold">Secure Sharing</h3>
+            <p className="text-lg text-gray-400 text-center">
+              Share passwords securely with family members or colleagues.
+            </p>
+          </motion.div>
         </div>
       </section>
       <section className=" max-w-[1440px] px-2 mx-auto overflow-hidden h-[60vh] flex flex-col items-center justify-center space-y-4 text-center relative">
