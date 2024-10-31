@@ -48,13 +48,16 @@ function Dashboard() {
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
-        <Button onClick={() => dialogueOpenTriggerRef.current.click()}>
+        <Button
+          onClick={() => dialogueOpenTriggerRef.current.click()}
+          variant="secondary"
+        >
           <CirclePlus size={18} /> <p className="ml-2">Add Password</p>
         </Button>
       </section>
 
       <section className="max-w-[1000px] mx-auto mt-5 border rounded-md">
-        <PasswordTable searchQuery={searchQuery} refetchChild={refetchChild} />
+        <PasswordTable searchQuery={searchQuery} refetchChild={refetchChild} />s
       </section>
       <PasswordModal
         ref={dialogueOpenTriggerRef}

@@ -123,7 +123,7 @@ const PasswordModal = forwardRef(
     };
 
     const closeModal = () => {
-      setData({ websiteName: "", email: "", password: "" });
+      if (data) setData({ websiteName: "", email: "", password: "" });
       dialogueCloseTriggerRef.current.click();
     };
 
