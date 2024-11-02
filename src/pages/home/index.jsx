@@ -48,12 +48,14 @@ function HomePage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
-          <Button className="min-[1000px]:text-lg">
-            <Link to="/auth">Get Started</Link>
-          </Button>
-          <Button variant="outline" className=" min-[1000px]:text-lg ">
-            <Link to="/auth">Learn More</Link>
-          </Button>
+          <Link to="/auth">
+            <Button className="min-[1000px]:text-lg">Get Started</Button>
+          </Link>
+          <Link to="/auth">
+            <Button variant="outline" className=" min-[1000px]:text-lg ">
+              Learn More
+            </Button>
+          </Link>
         </motion.div>
       </section>
       <section className="max-w-[1440px] mx-auto p-2 pb-5 flex flex-col overflow-hidden gap-16 items-center justify-center my-20">

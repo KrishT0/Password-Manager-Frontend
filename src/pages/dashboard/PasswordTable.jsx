@@ -84,7 +84,6 @@ function PasswordTable({ searchQuery, refetchChild }) {
         <div className="flex gap-1 cursor-pointer items-center">
           <a
             href={`${row.getValue()}`}
-            target="_blank"
             className=" flex gap-1 cursor-pointer items-center underline "
           >
             <span className="truncate w-40">{row.getValue()}</span>
@@ -243,7 +242,6 @@ function PasswordTable({ searchQuery, refetchChild }) {
           <ChevronLeft />
         </Button>
         <p className="text-sm">
-          {" "}
           Page {table.getState().pagination.pageIndex + 1} of{" "}
           {table.getPageCount()}
         </p>

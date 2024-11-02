@@ -1,8 +1,10 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 
 export default function Error() {
+  const navigate = useNavigate();
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-background text-foreground">
       <h1 className="text-6xl font-bold mb-4">404</h1>
@@ -11,12 +13,10 @@ export default function Error() {
         Oops! The page you're looking for doesn't exist. It might have been
         moved or deleted.
       </p>
-      <Link href="/">
-        <Button variant="default">
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          Back to Home
-        </Button>
-      </Link>
+      <Button variant="default" onClick={() => navigate(-1)}>
+        <ArrowLeft className="mr-2 h-4 w-4" />
+        Go Back
+      </Button>
     </div>
   );
 }

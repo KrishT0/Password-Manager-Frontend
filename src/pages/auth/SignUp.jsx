@@ -123,6 +123,10 @@ function SignUp() {
               value: 6,
               message: "Master key must be at least 6 characters",
             },
+            maxLength: {
+              value: 16,
+              message: "Master key must not exceed 16 characters",
+            },
           }}
           render={({ field }) => (
             <FormItem>

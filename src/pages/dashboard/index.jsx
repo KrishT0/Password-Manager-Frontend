@@ -57,7 +57,7 @@ function Dashboard() {
       </section>
 
       <section className="max-w-[1000px] mx-auto mt-5 border rounded-md">
-        <PasswordTable searchQuery={searchQuery} refetchChild={refetchChild} />s
+        <PasswordTable searchQuery={searchQuery} refetchChild={refetchChild} />
       </section>
       <PasswordModal
         ref={dialogueOpenTriggerRef}
