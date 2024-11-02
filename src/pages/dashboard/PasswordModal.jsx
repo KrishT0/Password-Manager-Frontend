@@ -133,7 +133,11 @@ const PasswordModal = forwardRef(
         <AlertDialogContent>
           <AlertDialogHeader className="flex flex-row justify-between">
             <AlertDialogTitle>
-              {deleteFlag ? "Delete Password" : "Add Password"}
+              {deleteFlag
+                ? "Delete Password"
+                : data
+                ? "Edit Password"
+                : "Add Password"}
             </AlertDialogTitle>
             {!deleteFlag && (
               <>
@@ -174,8 +178,9 @@ const PasswordModal = forwardRef(
             ) : (
               <>
                 <AlertDialogDescription>
-                  Please add a strong password to secure your account. You can
-                  later edit or delete the password.
+                  {data
+                    ? "Please edit the password to update the details."
+                    : "Please add a strong password to secure your account. You can later edit or delete the password."}
                 </AlertDialogDescription>
                 <Form {...form}>
                   <form
