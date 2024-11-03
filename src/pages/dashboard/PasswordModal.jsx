@@ -340,6 +340,8 @@ const PasswordModal = forwardRef(
           <DrawerDescription className="px-2 mb-2 text-center">
             {deleteFlag
               ? "Are you sure you want to delete this password?"
+              : data
+              ? "Please edit the password to update the details."
               : "Please add a strong password to secure your account. You can later edit or delete the password."}
           </DrawerDescription>
           {deleteFlag ? (
