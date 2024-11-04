@@ -31,7 +31,6 @@ import {
 } from "@/components/ui/alert-dialog";
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerDescription,
   DrawerHeader,
@@ -118,6 +117,10 @@ const PasswordModal = forwardRef(
       try {
         await deletePasswordAPI(deleteFlag);
         setRefetch((prev) => !prev);
+        toast({
+          title: "Success",
+          description: "Password deleted successfully",
+        });
         isDesktop
           ? dialogueCloseTriggerRef.current.click()
           : closeDrawerTriggerRef.current.click();
