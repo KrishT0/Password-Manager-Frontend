@@ -4,7 +4,7 @@ import HomeLayout from "@/layouts/HomeLayout";
 import HomepageSignup from "@/pages/home/HomepageSignup";
 
 //lucid icon imports
-import { Lock, RefreshCw, Share2 } from "lucide-react";
+import { Lock, RefreshCw, Share2, Github } from "lucide-react";
 
 //shadcn UI imports
 import { Button } from "@/components/ui/button";
@@ -137,15 +137,15 @@ function HomePage() {
         <HomepageSignup />
       </section>
       <footer className="border-t">
-        <section className="flex flex-col items-center gap-2 sm:flex-row justify-between p-8 max-w-[1440px] mx-auto">
+        <section className="flex flex-col items-center gap-2 sm:flex-row justify-between py-4 px-1 sm:p-8 max-w-[1440px] mx-auto">
           <p className="text-sm">
             © 2024 Password Manager. All rights reserved.
           </p>
-          <div className="flex gap-4">
-            <p className="text-sm hover:underline cursor-pointer">
-              Terms of Service
-            </p>
-            <p className="text-sm hover:underline cursor-pointer">Privacy</p>
+          <div className="flex gap-2 items-center">
+            Made by <span className="font-semibold">KrishT0</span>
+            <a href="https://github.com/KrishT0" target="_blank">
+              <Github className="h-5 w-5" />
+            </a>
           </div>
         </section>
       </footer>
