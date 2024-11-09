@@ -78,7 +78,7 @@ function HomePage() {
             <div className="absolute blur-3xl -z-10 bg-yellow-900 aspect-square rounded-full h-44"></div>
             <Lock className="h-10 w-10 mb-2" />
             <h3 className="text-xl font-bold">Secure Encryption</h3>
-            <p className="text-lg   text-center">
+            <p className="text-lg font-semibold text-gray-400  text-center">
               Your data is protected with industry-leading encryption
               technology.
             </p>
@@ -93,7 +93,7 @@ function HomePage() {
             <div className="absolute blur-3xl -z-10 bg-yellow-900 aspect-square rounded-full h-44"></div>
             <RefreshCw className="h-10 w-10 mb-2" />
             <h3 className="text-xl font-bold">Auto-Sync</h3>
-            <p className="text-lg text-gray-400 text-center">
+            <p className="text-lg font-semibold text-gray-400 text-center">
               Your passwords sync automatically across all your devices.
             </p>
           </motion.div>
@@ -107,7 +107,7 @@ function HomePage() {
             <div className="absolute blur-3xl -z-10 bg-yellow-900 aspect-square rounded-full h-44"></div>
             <Share2 className="h-10 w-10 mb-2" />
             <h3 className="text-xl font-bold">Secure Sharing</h3>
-            <p className="text-lg text-gray-400 text-center">
+            <p className="text-lg font-semibold text-gray-400 text-center">
               Share passwords securely with family members or colleagues.
             </p>
           </motion.div>
@@ -141,10 +141,10 @@ function HomePage() {
           <p className="text-sm">
             © 2024 Password Manager. All rights reserved.
           </p>
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-1 text-sm  items-center">
             Made by <span className="font-semibold">KrishT0</span>
             <a href="https://github.com/KrishT0" target="_blank">
-              <Github className="h-5 w-5" />
+              <Github className="h-4 w-4" />
             </a>
           </div>
         </section>
