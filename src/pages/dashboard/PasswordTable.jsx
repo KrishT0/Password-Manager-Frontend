@@ -40,6 +40,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import PasswordModal from "./PasswordModal";
+import PasswordCell from "@/components/custom/password-cell";
 
 function PasswordTable({ searchQuery, refetchChild }) {
   const dialogueOpenTriggerRef = useRef(null);
@@ -102,7 +103,7 @@ function PasswordTable({ searchQuery, refetchChild }) {
     {
       header: "Password",
       accessorKey: "password",
-      cell: (row) => <div>{row.getValue()}</div>,
+      cell: (row) => <PasswordCell password={row.getValue()} />,
       enableGlobalFilter: false,
     },
     {
