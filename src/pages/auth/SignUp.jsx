@@ -77,7 +77,7 @@ function SignUp() {
                   autoComplete="off"
                   placeholder="John Doe"
                   {...field}
-                  className="!mt-0"
+                  className="!mt-0 bg-secondary"
                 />
               </FormControl>
               <FormMessage />
@@ -107,7 +107,7 @@ function SignUp() {
                   autoComplete="off"
                   placeholder="example@gmail.com"
                   {...field}
-                  className="!mt-0"
+                  className="!mt-0 bg-secondary"
                 />
               </FormControl>
               <FormMessage />
@@ -139,7 +139,7 @@ function SignUp() {
                     id="masterKey"
                     placeholder="master key"
                     {...field}
-                    className="!mt-0 pr-10"
+                    className="!mt-0 pr-10 bg-secondary"
                     type={showPassword ? "text" : "password"}
                   />
                   <button

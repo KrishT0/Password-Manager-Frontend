@@ -44,7 +44,7 @@ function Dashboard() {
           <Input
             id="search-website"
             placeholder="Search Website"
-            className="pl-10"
+            className="pl-10 bg-secondary"
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>

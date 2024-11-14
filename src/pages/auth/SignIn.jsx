@@ -74,7 +74,7 @@ function SignIn() {
                   id="email"
                   placeholder="example@gmail.com"
                   {...field}
-                  className="!mt-0"
+                  className="!mt-0 bg-secondary"
                 />
               </FormControl>
               <FormMessage />
@@ -102,7 +102,7 @@ function SignIn() {
                     id="masterKey"
                     placeholder="master key"
                     {...field}
-                    className="!mt-0 pr-10"
+                    className="!mt-0 pr-10 bg-secondary"
                     type={showPassword ? "text" : "password"}
                   />
                   <button
