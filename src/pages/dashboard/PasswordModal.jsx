@@ -4,9 +4,10 @@ import { useForm } from "react-hook-form";
 import { addPasswordAPI, deletePasswordAPI, editPasswordAPI } from "@/api";
 import { useToast } from "@/hooks/use-toast";
 import { useMediaQuery } from "@/hooks/use-media-query";
+import SmallLoader from "@/components/custom/small-loader";
 
 //icon imports
-import { Eye, EyeOff, CircleX, LoaderCircle } from "lucide-react";
+import { Eye, EyeOff, CircleX } from "lucide-react";
 
 //shadcn UI imports
 import { Input } from "@/components/ui/input";
@@ -271,6 +272,10 @@ const PasswordModal = forwardRef(
                           value: 6,
                           message: "Password must be at least 6 characters",
                         },
+                        maxLength: {
+                          value: 16,
+                          message: "Password must be at most 16 characters",
+                        },
                       }}
                       render={({ field }) => (
                         <FormItem>
@@ -306,9 +311,7 @@ const PasswordModal = forwardRef(
                     />
                     <Button className="w-2/4 mx-auto" type="submit">
                       {form.formState.isSubmitting ? (
-                        <div className="animate-spin">
-                          <LoaderCircle size={20} />
-                        </div>
+                        <SmallLoader />
                       ) : editFlag ? (
                         "Edit Password"
                       ) : (
@@ -425,6 +428,10 @@ const PasswordModal = forwardRef(
                       value: 6,
                       message: "Password must be at least 6 characters",
                     },
+                    maxLength: {
+                      value: 16,
+                      message: "Password must be at most 16 characters",
+                    },
                   }}
                   render={({ field }) => (
                     <FormItem>
@@ -460,9 +467,7 @@ const PasswordModal = forwardRef(
                 />
                 <Button className="w-2/4 mx-auto" type="submit">
                   {form.formState.isSubmitting ? (
-                    <div className="animate-spin">
-                      <LoaderCircle size={20} />
-                    </div>
+                    <SmallLoader />
                   ) : editFlag ? (
                     "Edit Password"
                   ) : (
