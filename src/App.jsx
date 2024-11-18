@@ -9,7 +9,12 @@ import { Analytics } from "@vercel/analytics/react";
 function App() {
   return (
     <Suspense fallback={<Loader />}>
-      <RouterProvider router={router} />
+      <RouterProvider
+        router={router}
+        future={{
+          v7_startTransition: true,
+        }}
+      />
       <Toaster duration="3000" />
       <SpeedInsights />
       <Analytics />

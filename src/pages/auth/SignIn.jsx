@@ -118,7 +118,11 @@ function SignIn() {
             </FormItem>
           )}
         />
-        <Button className="w-2/4 mx-auto" type="submit">
+        <Button
+          className="w-2/4 mx-auto"
+          type="submit"
+          disabled={form.formState.isSubmitting}
+        >
           {form.formState.isSubmitting ? <SmallLoader /> : "Sign In"}
         </Button>
       </form>
