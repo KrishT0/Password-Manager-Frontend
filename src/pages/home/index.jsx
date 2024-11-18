@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import HomeLayout from "@/layouts/HomeLayout";
 import HomepageSignup from "@/pages/home/HomepageSignup";
 
 //lucid icon imports
@@ -11,7 +10,7 @@ import { Button } from "@/components/ui/button";
 
 function HomePage() {
   return (
-    <HomeLayout>
+    <div>
       <header>
         <nav className="max-w-[1440px] mx-auto flex justify-between items-center p-2">
           <h1 className="text-lg font-semibold border p-1 rounded-full">PM</h1>
@@ -149,7 +148,7 @@ function HomePage() {
           </div>
         </section>
       </footer>
-    </HomeLayout>
+    </div>
   );
 }
 

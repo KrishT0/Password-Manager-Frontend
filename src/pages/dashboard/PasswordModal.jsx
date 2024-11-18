@@ -334,10 +334,9 @@ const PasswordModal = forwardRef(
         dismissible={false}
         open={isDrawerOpen}
         onOpenChange={setIsDrawerOpen}
-        className="[&_[data-drawer-handle]]:hidden"
       >
         <DrawerTrigger ref={ref}></DrawerTrigger>
-        <DrawerContent className="pt-3 [&>div:first-child]:!hidden">
+        <DrawerContent className="pt-3 [&>div:first-child]:hidden">
           <DrawerHeader>
             <DrawerTitle>
               {deleteFlag
