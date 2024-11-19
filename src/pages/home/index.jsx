@@ -142,7 +142,10 @@ function HomePage() {
           </p>
           <div className="flex gap-1 text-sm  items-center">
             Made by <span className="font-semibold">KrishT0</span>
-            <a href="https://github.com/KrishT0" target="_blank">
+            <a
+              href="https://github.com/KrishT0/Password-Manager-Frontend"
+              target="_blank"
+            >
               <Github className="h-4 w-4" />
             </a>
           </div>
