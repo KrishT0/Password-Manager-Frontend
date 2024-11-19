@@ -2,8 +2,6 @@
 
 This is the frontend of the Password Manager application, designed to provide a secure and user-friendly interface for managing your passwords. The app integrates with the backend service to perform operations like storing, retrieving, and updating encrypted passwords.
 
----
-
 ## Table of Contents
 
 - [Features](#features)
@@ -13,8 +11,6 @@ This is the frontend of the Password Manager application, designed to provide a 
 - [Contributing](#contributing)
 - [License](#license)
 
----
-
 ## Features
 
 - **Secure Login and Signup**: Supports authentication with secure credentials.
@@ -23,15 +19,11 @@ This is the frontend of the Password Manager application, designed to provide a 
 - **Search Functionality**: Quickly find stored passwords.
 - **Responsive Design**: Fully optimized for mobile and desktop screens.
 
----
-
 ## Technologies Used
 
 - **Frontend Framework**: ReactJs, React Router, React Hook Form, Tanstack Table
-- **Styling**: Tailwind CSS, Shacdcn UI
+- **Styling**: Tailwind CSS, Shadcn UI
 - **Build Tool**: Vite
-
----
 
 ## Getting Started
 
@@ -58,7 +50,7 @@ This is the frontend of the Password Manager application, designed to provide a 
 3. Configure environment variables:
 
    - Create a `.env` file in the root directory.
-   - Add the required environment variables (e.g., API endpoint, authentication keys).
+   - Add the required environment variables (e.g., API endpoint).
 
    ```env
    VITE_BASE_URL=http://localhost:3001/
@@ -72,8 +64,6 @@ This is the frontend of the Password Manager application, designed to provide a 
 
 5. Browser will open automatically at:  
    [http://localhost:5173](http://localhost:5173)
-
----
 
 ## Project Structure
 
@@ -112,8 +102,6 @@ password-manager-frontend/
 └── README.md             # Project documentation
 ```
 
----
-
 ## Contributing
 
 Contributions are welcome!
@@ -125,15 +113,13 @@ Contributions are welcome!
    ```
 3. Commit your changes:
    ```bash
-   git commit -m "Add new feature"
+   git commit -m "Added new feature"
    ```
 4. Push the branch:
    ```bash
    git push origin feat/feature-name
    ```
 5. Open a Pull Request.
-
----
 
 ## License
 
