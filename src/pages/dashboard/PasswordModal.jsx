@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, forwardRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import { addPasswordAPI, deletePasswordAPI, editPasswordAPI } from "@/api";
 import { useToast } from "@/hooks/use-toast";
 import { useMediaQuery } from "@/hooks/use-media-query";
@@ -69,6 +69,19 @@ const PasswordModal = forwardRef(
 
     const form = useForm({ defaultValues });
 
+    const generatePassword = () => {
+      const charset =
+        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
+      let newPassword = "";
+      for (let i = 0; i < 12; i++) {
+        newPassword += charset.charAt(
+          Math.floor(Math.random() * charset.length)
+        );
+      }
+      form.setValue("password", newPassword);
+      setShowPassword(true);
+    };
+
     const onSubmitData = async (data) => {
       try {
         if (addFlag) {
@@ -112,6 +125,7 @@ const PasswordModal = forwardRef(
 
     useEffect(() => {
       form.reset(defaultValues);
+      setShowPassword(false);
     }, [data]);
 
     const handleDeletePassword = async () => {
@@ -123,9 +137,10 @@ const PasswordModal = forwardRef(
           description: "Password deleted successfully",
         });
         isDesktop
-          ? dialogueCloseTriggerRef.current.click()
+          ? deleteDialogueCloseTriggerRef.current.click()
           : closeDrawerTriggerRef.current.click();
       } catch (error) {
+        console.log(error);
         const errorMessage = error.response.data.message;
         if (
           errorMessage.includes("jwt") ||
@@ -282,29 +297,38 @@ const PasswordModal = forwardRef(
                           <FormLabel htmlFor="password" className="pl-1">
                             Password
                           </FormLabel>
-                          <FormControl className="!mt-0">
-                            <div className="relative">
-                              <Input
-                                id="password"
-                                autoComplete="off"
-                                placeholder="Password"
-                                {...field}
-                                className="!mt-0 pr-10"
-                                type={showPassword ? "text" : "password"}
-                              />
-                              <button
-                                type="button"
-                                onClick={() => setShowPassword(!showPassword)}
-                                className="absolute right-3 top-1/2 transform -translate-y-1/2"
-                              >
-                                {showPassword ? (
-                                  <EyeOff size={20} />
-                                ) : (
-                                  <Eye size={20} />
-                                )}
-                              </button>
-                            </div>
-                          </FormControl>
+                          <div className="flex gap-2 items-end">
+                            <FormControl className="!mt-0">
+                              <div className="relative">
+                                <Input
+                                  id="password"
+                                  autoComplete="off"
+                                  placeholder="Password"
+                                  {...field}
+                                  className="!mt-0 pr-10"
+                                  type={showPassword ? "text" : "password"}
+                                />
+                                <button
+                                  type="button"
+                                  onClick={() => setShowPassword(!showPassword)}
+                                  className="absolute right-3 top-1/2 transform -translate-y-1/2"
+                                >
+                                  {showPassword ? (
+                                    <EyeOff size={20} />
+                                  ) : (
+                                    <Eye size={20} />
+                                  )}
+                                </button>
+                              </div>
+                            </FormControl>
+                            <Button
+                              type="button"
+                              variant="outline"
+                              onClick={generatePassword}
+                            >
+                              Generate
+                            </Button>
+                          </div>
                           <FormMessage />
                         </FormItem>
                       )}
@@ -441,29 +465,38 @@ const PasswordModal = forwardRef(
                       <FormLabel htmlFor="password" className="pl-1">
                         Password
                       </FormLabel>
-                      <FormControl className="!mt-0">
-                        <div className="relative">
-                          <Input
-                            id="password"
-                            autoComplete="off"
-                            placeholder="Password"
-                            {...field}
-                            className="!mt-0 pr-10"
-                            type={showPassword ? "text" : "password"}
-                          />
-                          <button
-                            type="button"
-                            onClick={() => setShowPassword(!showPassword)}
-                            className="absolute right-3 top-1/2 transform -translate-y-1/2"
-                          >
-                            {showPassword ? (
-                              <EyeOff size={20} />
-                            ) : (
-                              <Eye size={20} />
-                            )}
-                          </button>
-                        </div>
-                      </FormControl>
+                      <div className="flex gap-2 items-end">
+                        <FormControl className="!mt-0">
+                          <div className="relative w-full">
+                            <Input
+                              id="password"
+                              autoComplete="off"
+                              placeholder="Password"
+                              {...field}
+                              className="!mt-0 pr-10"
+                              type={showPassword ? "text" : "password"}
+                            />
+                            <button
+                              type="button"
+                              onClick={() => setShowPassword(!showPassword)}
+                              className="absolute right-3 top-1/2 transform -translate-y-1/2"
+                            >
+                              {showPassword ? (
+                                <EyeOff size={20} />
+                              ) : (
+                                <Eye size={20} />
+                              )}
+                            </button>
+                          </div>
+                        </FormControl>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          onClick={generatePassword}
+                        >
+                          Generate
+                        </Button>
+                      </div>
                       <FormMessage />
                     </FormItem>
                   )}

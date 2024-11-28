@@ -32,6 +32,17 @@ function SignUp() {
   const navigate = useNavigate();
   const { toast } = useToast();
 
+  const generatePassword = () => {
+    const charset =
+      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
+    let newPassword = "";
+    for (let i = 0; i < 12; i++) {
+      newPassword += charset.charAt(Math.floor(Math.random() * charset.length));
+    }
+    form.setValue("masterKey", newPassword);
+    setShowPassword(true);
+  };
+
   const onSubmit = async (data) => {
     try {
       const response = await signUpAPI(data);
@@ -133,24 +144,35 @@ function SignUp() {
               <FormLabel htmlFor="masterKey" className="pl-1">
                 Master Key
               </FormLabel>
-              <FormControl className="!mt-0">
-                <div className="relative">
-                  <Input
-                    id="masterKey"
-                    placeholder="master key"
-                    {...field}
-                    className="!mt-0 pr-10 bg-secondary"
-                    type={showPassword ? "text" : "password"}
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2"
-                  >
-                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                  </button>
-                </div>
-              </FormControl>
+              <div className="flex gap-2 items-end">
+                <FormControl className="!mt-0">
+                  <div className="relative w-4/5">
+                    <Input
+                      id="masterKey"
+                      placeholder="master key"
+                      {...field}
+                      className="!mt-0 pr-10 bg-secondary"
+                      type={showPassword ? "text" : "password"}
+                    />
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setShowPassword((showPassword) => !showPassword)
+                      }
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2"
+                    >
+                      {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                    </button>
+                  </div>
+                </FormControl>
+                <Button
+                  type="button"
+                  variant="secondary"
+                  onClick={generatePassword}
+                >
+                  Generate
+                </Button>
+              </div>
               <FormMessage />
             </FormItem>
           )}
