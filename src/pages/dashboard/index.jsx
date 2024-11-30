@@ -18,7 +18,7 @@ function Dashboard() {
 
   const onLogout = () => {
     localStorage.removeItem("token");
-    navigate("/");
+    navigate("/auth");
   };
 
   return (

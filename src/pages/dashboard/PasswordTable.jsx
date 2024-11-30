@@ -70,7 +70,7 @@ function PasswordTable({ searchQuery, refetchChild }) {
             variant: "destructive",
           });
           localStorage.clear();
-          navigate("/");
+          navigate("/auth");
         }
       }
     };

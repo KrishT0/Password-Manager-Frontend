@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, forwardRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { addPasswordAPI, deletePasswordAPI, editPasswordAPI } from "@/api";
 import { useToast } from "@/hooks/use-toast";
 import { useMediaQuery } from "@/hooks/use-media-query";
@@ -109,7 +109,7 @@ const PasswordModal = forwardRef(
           errorMessage.includes("exist")
         ) {
           localStorage.clear();
-          navigate("/");
+          navigate("/auth");
         }
         setData({ websiteName: "", email: "", password: "" });
         toast({
@@ -153,7 +153,7 @@ const PasswordModal = forwardRef(
             variant: "destructive",
           });
           localStorage.clear();
-          navigate("/");
+          navigate("/auth");
         }
       }
     };

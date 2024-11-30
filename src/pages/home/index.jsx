@@ -9,16 +9,19 @@ import { Lock, RefreshCw, Share2, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 function HomePage() {
+  const isAuthenticated = !!localStorage.getItem("token");
+  console.log(isAuthenticated);
+
   return (
     <div>
       <header>
         <nav className="max-w-[1440px] mx-auto flex justify-between items-center p-2">
           <h1 className="text-lg font-semibold border p-1 rounded-full">PM</h1>
           <Link
-            to="/auth"
-            className="text-muted-foreground hover:text-primary transition-all duration-200"
+            to={isAuthenticated ? "/dashboard" : "/auth"}
+            className="text-primary hover:text-primary/80 transition-all duration-200"
           >
-            Login
+            {isAuthenticated ? "Dashboard" : "Login"}
           </Link>
         </nav>
       </header>
