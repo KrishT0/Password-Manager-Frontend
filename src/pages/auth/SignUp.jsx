@@ -40,6 +40,7 @@ function SignUp() {
       newPassword += charset.charAt(Math.floor(Math.random() * charset.length));
     }
     form.setValue("masterKey", newPassword);
+    form.clearErrors("masterKey");
     setShowPassword(true);
   };
 

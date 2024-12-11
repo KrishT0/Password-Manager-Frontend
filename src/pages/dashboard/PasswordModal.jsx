@@ -79,6 +79,7 @@ const PasswordModal = forwardRef(
         );
       }
       form.setValue("password", newPassword);
+      form.clearErrors("password");
       setShowPassword(true);
     };
 
