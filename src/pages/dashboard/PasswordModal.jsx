@@ -141,7 +141,6 @@ const PasswordModal = forwardRef(
           ? deleteDialogueCloseTriggerRef.current.click()
           : closeDrawerTriggerRef.current.click();
       } catch (error) {
-        console.log(error);
         const errorMessage = error.response.data.message;
         if (
           errorMessage.includes("jwt") ||

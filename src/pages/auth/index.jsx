@@ -15,7 +15,6 @@ function AuthPage() {
 
   useEffect(() => {
     const isAuthenticated = !!localStorage.getItem("token");
-    console.log(isAuthenticated);
     if (isAuthenticated) {
       navigate("/dashboard");
     }

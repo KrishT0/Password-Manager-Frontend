@@ -10,7 +10,6 @@ import { Button } from "@/components/ui/button";
 
 function HomePage() {
   const isAuthenticated = !!localStorage.getItem("token");
-  console.log(isAuthenticated);
 
   return (
     <div>
