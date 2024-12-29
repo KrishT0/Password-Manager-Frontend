@@ -35,6 +35,11 @@ function SignIn() {
     try {
       const response = await loginAPI(data);
       localStorage.setItem("token", response.data.token);
+   
+      const expirationTime = new Date();
+      expirationTime.setHours(expirationTime.getHours() + 3);
+      localStorage.setItem("expirationTime", expirationTime.toISOString());
+
       navigate("/dashboard");
     } catch (error) {
       toast({
