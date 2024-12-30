@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 //icon imports
-import { CirclePlus, Search } from "lucide-react";
+import { CirclePlus, Search, LogOut, House } from "lucide-react";
 
 //shadcn UI imports
 import { Button } from "@/components/ui/button";
@@ -24,6 +24,13 @@ function Dashboard() {
   return (
     <div className="px-1">
       <div className="relative ">
+        <Button
+          variant="ghost"
+          className="absolute sm:-top-1 sm:left-5 left-1 -top-2"
+          onClick={() => navigate("/")}
+        >
+          <House className="h-5 md:h-8" />
+        </Button>
         <h1 className="text-xl sm:text-2xl md:text-4xl font-semibold text-center my-3 sm:my-5">
           Dashboard
         </h1>
@@ -32,7 +39,7 @@ function Dashboard() {
           className="absolute sm:-top-1 sm:right-5 right-1 -top-2"
           onClick={onLogout}
         >
-          Logout
+          <LogOut className="h-5 md:h-8" />
         </Button>
       </div>
       <section className="max-w-[1000px] mx-auto flex gap-5 items-center justify-start mt-10">

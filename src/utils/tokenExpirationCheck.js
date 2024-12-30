@@ -1,6 +1,6 @@
 import { redirect } from "react-router-dom";
 
-export function tableData() {
+export function tokenExpirationCheck() {
   const token = localStorage.getItem("token");
   const expirationTime = localStorage.getItem("expirationTime");
   if (!expirationTime || new Date(expirationTime) <= new Date() || !token) {

@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import { lazy } from "react";
-import { tableData } from "@/utils/tableData";
+import { tokenExpirationCheck } from "@/utils/tokenExpirationCheck";
 
 const HomePage = lazy(() => import("@/pages/home"));
 const AuthPage = lazy(() => import("@/pages/auth"));
@@ -19,7 +19,7 @@ const routes = [
   },
   {
     path: "/dashboard",
-    loader: tableData,
+    loader: tokenExpirationCheck,
     element: <Dashboard />,
   },
 ];
