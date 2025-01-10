@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { getPasswordsAPI } from "@/api";
 import { useToast } from "@/hooks/use-toast";
+import { useQuery } from "@tanstack/react-query";
 import {
   useReactTable,
   flexRender,
@@ -9,6 +10,8 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
 } from "@tanstack/react-table";
+import PasswordModal from "@/pages/dashboard/PasswordModal";
+import PasswordCell from "@/components/custom/password-cell";
 
 //icon imports
 import {
@@ -39,43 +42,42 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import PasswordModal from "./PasswordModal";
-import PasswordCell from "@/components/custom/password-cell";
 
-function PasswordTable({ searchQuery, refetchChild }) {
+function PasswordTable({ searchQuery }) {
   const dialogueOpenTriggerRef = useRef(null);
   const [rowData, setRowData] = useState({});
   const [rowId, setRowId] = useState("");
   const [editId, setEditId] = useState("");
-  const [data, setData] = useState([]);
-  const [refetch, setRefetch] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await getPasswordsAPI();
-        setData(response.data);
-      } catch (err) {
-        const errorMessage = err.response.data.message;
-        if (
-          errorMessage.includes("jwt") ||
-          errorMessage.includes("login") ||
-          errorMessage.includes("exist")
-        ) {
-          toast({
-            title: "Error",
-            description: errorMessage,
-            variant: "destructive",
-          });
-          localStorage.clear();
-          navigate("/auth");
-        }
-      }
-    };
-    fetchData();
-  }, [refetch, refetchChild]);
+  const { data, error } = useQuery({
+    queryKey: ["passwords"],
+    queryFn: getPasswordsAPI,
+    placeholderData: { data: [] },
+    refetchOnWindowFocus: false,
+    staleTime: 1000 * 60 * 5,
+  });
+
+  console.log(data);
+
+  if (error) {
+    console.log(error);
+    const errorMessage = error.response.data.message;
+    if (
+      errorMessage.includes("jwt") ||
+      errorMessage.includes("login") ||
+      errorMessage.includes("exist")
+    ) {
+      toast({
+        title: "Error",
+        description: errorMessage,
+        variant: "destructive",
+      });
+      localStorage.clear();
+      navigate("/auth");
+    }
+  }
 
   const columnDef = [
     {
@@ -170,7 +172,7 @@ function PasswordTable({ searchQuery, refetchChild }) {
   });
 
   const table = useReactTable({
-    data,
+    data: data.data,
     columns: columnDef,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -269,7 +271,6 @@ function PasswordTable({ searchQuery, refetchChild }) {
         setData={setRowData}
         editFlag={editId}
         deleteFlag={rowId}
-        setRefetch={setRefetch}
       />
     </>
   );

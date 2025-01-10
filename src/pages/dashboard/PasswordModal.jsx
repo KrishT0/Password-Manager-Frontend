@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { addPasswordAPI, deletePasswordAPI, editPasswordAPI } from "@/api";
 import { useToast } from "@/hooks/use-toast";
 import { useMediaQuery } from "@/hooks/use-media-query";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
 import SmallLoader from "@/components/custom/small-loader";
 
 //icon imports
@@ -40,18 +41,7 @@ import {
 } from "@/components/ui/drawer";
 
 const PasswordModal = forwardRef(
-  (
-    {
-      data,
-      setData,
-      deleteFlag,
-      addFlag,
-      editFlag,
-      setRefetch,
-      setRefetchChild,
-    },
-    ref
-  ) => {
+  ({ data, setData, deleteFlag, addFlag, editFlag }, ref) => {
     const [showPassword, setShowPassword] = useState(false);
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const dialogueCloseTriggerRef = useRef(null);
@@ -66,7 +56,7 @@ const PasswordModal = forwardRef(
       email: data?.email || "",
       password: data?.password || "",
     };
-
+    const queryClient = useQueryClient();
     const form = useForm({ defaultValues });
 
     const generatePassword = () => {
@@ -83,24 +73,50 @@ const PasswordModal = forwardRef(
       setShowPassword(true);
     };
 
+    const addData = useMutation({
+      mutationFn: (data) => addPasswordAPI(data),
+      onSuccess: () => {
+        form.reset(defaultValues);
+        toast({
+          title: "Success",
+          description: "Password added successfully",
+        });
+        queryClient.invalidateQueries({ queryKey: ["passwords"] });
+      },
+    });
+
+    const editData = useMutation({
+      mutationFn: (data) => editPasswordAPI(data),
+      onSuccess: async () => {
+        toast({
+          title: "Success",
+          description: "Password edited successfully",
+        });
+        queryClient.invalidateQueries({ queryKey: ["passwords"] });
+      },
+    });
+
+    const deleteData = useMutation({
+      mutationFn: (id) => deletePasswordAPI(id),
+      onSuccess: () => {
+        toast({
+          title: "Success",
+          description: "Password deleted successfully",
+        });
+        isDesktop
+          ? deleteDialogueCloseTriggerRef.current.click()
+          : closeDrawerTriggerRef.current.click();
+        queryClient.invalidateQueries({ queryKey: ["passwords"] });
+      },
+    });
+
     const onSubmitData = async (data) => {
       try {
         if (addFlag) {
-          await addPasswordAPI(data);
-          form.reset(defaultValues);
-          setRefetchChild((prev) => !prev);
-          toast({
-            title: "Success",
-            description: "Password added successfully",
-          });
+          await addData.mutateAsync(data);
         } else {
           const body = { ...data, _id: editFlag };
-          await editPasswordAPI(body);
-          setRefetch((prev) => !prev);
-          toast({
-            title: "Success",
-            description: "Password edited successfully",
-          });
+          await editData.mutateAsync(body);
         }
       } catch (error) {
         const errorMessage = error.response.data.message;
@@ -131,15 +147,7 @@ const PasswordModal = forwardRef(
 
     const handleDeletePassword = async () => {
       try {
-        await deletePasswordAPI(deleteFlag);
-        setRefetch((prev) => !prev);
-        toast({
-          title: "Success",
-          description: "Password deleted successfully",
-        });
-        isDesktop
-          ? deleteDialogueCloseTriggerRef.current.click()
-          : closeDrawerTriggerRef.current.click();
+        await deleteData.mutateAsync(deleteFlag);
       } catch (error) {
         const errorMessage = error.response.data.message;
         if (

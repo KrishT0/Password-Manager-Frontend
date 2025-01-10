@@ -1,5 +1,8 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { useQueryClient } from "@tanstack/react-query";
+import PasswordTable from "@/pages/dashboard/PasswordTable";
+import PasswordModal from "@/pages/dashboard/PasswordModal";
 
 //icon imports
 import { CirclePlus, Search, LogOut, House } from "lucide-react";
@@ -7,17 +10,16 @@ import { CirclePlus, Search, LogOut, House } from "lucide-react";
 //shadcn UI imports
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import PasswordTable from "./PasswordTable";
-import PasswordModal from "./PasswordModal";
 
 function Dashboard() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [refetchChild, setRefetchChild] = useState(false);
   const dialogueOpenTriggerRef = useRef(null);
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const onLogout = () => {
     localStorage.removeItem("token");
+    queryClient.removeQueries({ queryKey: ["passwords"] });
     navigate("/auth");
   };
 
@@ -64,13 +66,9 @@ function Dashboard() {
       </section>
 
       <section className="max-w-[1000px] mx-auto mt-5 border rounded-md">
-        <PasswordTable searchQuery={searchQuery} refetchChild={refetchChild} />
+        <PasswordTable searchQuery={searchQuery} />
       </section>
-      <PasswordModal
-        ref={dialogueOpenTriggerRef}
-        addFlag={true}
-        setRefetchChild={setRefetchChild}
-      />
+      <PasswordModal ref={dialogueOpenTriggerRef} addFlag={true} />
     </div>
   );
 }

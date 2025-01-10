@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
 import { loginAPI } from "@/api";
 import { useToast } from "@/hooks/use-toast";
 import SmallLoader from "@/components/custom/small-loader";
@@ -31,16 +32,21 @@ function SignIn() {
   const { toast } = useToast();
   const navigate = useNavigate();
 
-  const onSubmit = async (data) => {
-    try {
-      const response = await loginAPI(data);
+  const loginMutation = useMutation({
+    mutationFn: (data) => loginAPI(data),
+    onSuccess: (response) => {
       localStorage.setItem("token", response.data.token);
-   
       const expirationTime = new Date();
       expirationTime.setHours(expirationTime.getHours() + 3);
       localStorage.setItem("expirationTime", expirationTime.toISOString());
 
       navigate("/dashboard");
+    },
+  });
+
+  const onSubmit = async (data) => {
+    try {
+      await loginMutation.mutateAsync(data);
     } catch (error) {
       toast({
         title: "Error",
