@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
 import { signUpAPI } from "@/api";
 import { useToast } from "@/hooks/use-toast";
 import SmallLoader from "@/components/custom/small-loader";
@@ -44,11 +45,20 @@ function SignUp() {
     setShowPassword(true);
   };
 
+  const signUpMutation = useMutation({
+    mutationFn: (data) => signUpAPI(data),
+    onSuccess: (response) => {
+      localStorage.setItem("token", response.data.token);
+      const expirationTime = new Date();
+      expirationTime.setHours(expirationTime.getHours() + 3);
+      localStorage.setItem("expirationTime", expirationTime.toISOString());
+      navigate("/dashboard");
+    },
+  });
+
   const onSubmit = async (data) => {
     try {
-      const response = await signUpAPI(data);
-      localStorage.setItem("token", response.data.token);
-      navigate("/dashboard");
+      await signUpMutation.mutateAsync(data);
     } catch (error) {
       toast({
         title: "Error",

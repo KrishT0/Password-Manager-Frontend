@@ -57,12 +57,10 @@ function PasswordTable({ searchQuery }) {
     placeholderData: { data: [] },
     refetchOnWindowFocus: false,
     staleTime: 1000 * 60 * 5,
+    gcTime: 1000 * 60 * 10,
   });
 
-  console.log(data);
-
   if (error) {
-    console.log(error);
     const errorMessage = error.response.data.message;
     if (
       errorMessage.includes("jwt") ||
