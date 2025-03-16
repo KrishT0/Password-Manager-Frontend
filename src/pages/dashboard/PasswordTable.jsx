@@ -56,8 +56,8 @@ function PasswordTable({ searchQuery }) {
     queryFn: getPasswordsAPI,
     placeholderData: { data: [] },
     refetchOnWindowFocus: false,
-    staleTime: 1000 * 60 * 5,
-    gcTime: 1000 * 60 * 10,
+    staleTime: 1000 * 60 * 5, // staleTime means the time after which the data is considered old and a new request is made
+    gcTime: 1000 * 60 * 10, // gcTime means the time after which the data from the cache is removed
   });
 
   if (error) {

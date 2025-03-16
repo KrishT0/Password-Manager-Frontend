@@ -92,6 +92,7 @@ const PasswordModal = forwardRef(
           title: "Success",
           description: "Password edited successfully",
         });
+        // invalidateQueries is used to refetch the data from the server
         queryClient.invalidateQueries({ queryKey: ["passwords"] });
       },
     });
@@ -116,6 +117,8 @@ const PasswordModal = forwardRef(
           await addData.mutateAsync(data);
         } else {
           const body = { ...data, _id: editFlag };
+          // Here mutateAsync is used because regular mutate returns a promise which by default return undefined when any error occurs,
+          // but mutateAsync behaves properly as a regular promise.
           await editData.mutateAsync(body);
         }
       } catch (error) {

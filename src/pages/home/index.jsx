@@ -140,7 +140,7 @@ function HomePage() {
       <footer className="border-t">
         <section className="flex flex-col items-center gap-2 sm:flex-row justify-between py-4 px-1 sm:p-8 max-w-[1440px] mx-auto">
           <p className="text-sm">
-            © 2024 Password Manager. All rights reserved.
+            © {new Date().getFullYear()} Password Manager. All rights reserved.
           </p>
           <div className="flex gap-1 text-sm  items-center">
             Made by <span className="font-semibold">KrishT0</span>
