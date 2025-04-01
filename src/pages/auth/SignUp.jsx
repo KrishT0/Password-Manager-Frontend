@@ -34,12 +34,29 @@ function SignUp() {
   const { toast } = useToast();
 
   const generatePassword = () => {
-    const charset =
-      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
+    const lower = "abcdefghijklmnopqrstuvwxyz";
+    const upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const digits = "0123456789";
+    const special = "!@#$%^&*()_+";
+    const allChars = lower + upper + digits + special;
+
     let newPassword = "";
-    for (let i = 0; i < 12; i++) {
-      newPassword += charset.charAt(Math.floor(Math.random() * charset.length));
+    const length = 12;
+
+    newPassword += lower[Math.floor(Math.random() * lower.length)];
+    newPassword += upper[Math.floor(Math.random() * upper.length)];
+    newPassword += digits[Math.floor(Math.random() * digits.length)];
+    newPassword += special[Math.floor(Math.random() * special.length)];
+
+    for (let i = 4; i < length; i++) {
+      newPassword += allChars[Math.floor(Math.random() * allChars.length)];
     }
+
+    newPassword = newPassword
+      .split("")
+      .sort(() => Math.random() - 0.5)
+      .join("");
+
     form.setValue("masterKey", newPassword);
     form.clearErrors("masterKey");
     setShowPassword(true);

@@ -77,6 +77,12 @@ function PasswordTable({ searchQuery }) {
     }
   }
 
+  const checkPasswordStrength = (password) => {
+    const strongRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return strongRegex.test(password);
+  };
+
   const columnDef = [
     {
       header: "Website Name",
@@ -99,6 +105,23 @@ function PasswordTable({ searchQuery }) {
       accessorKey: "email",
       cell: (row) => <div>{row.getValue()}</div>,
       enableGlobalFilter: false,
+    },
+    {
+      header: "Strength",
+      enableGlobalFilter: false,
+      cell: ({ row }) => {
+        const strength = checkPasswordStrength(row.original.password);
+        return (
+          <div className="flex gap-1 items-center">
+            <div
+              className={`h-3 w-3 mr-2 rounded-full ${
+                strength ? "bg-green-500" : "bg-red-500"
+              }`}
+            ></div>
+            <p>{strength ? "Strong" : "Weak"}</p>
+          </div>
+        );
+      },
     },
     {
       header: "Password",
