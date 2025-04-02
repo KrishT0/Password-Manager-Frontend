@@ -79,7 +79,7 @@ function PasswordTable({ searchQuery }) {
 
   const checkPasswordStrength = (password) => {
     const strongRegex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
     return strongRegex.test(password);
   };
 
