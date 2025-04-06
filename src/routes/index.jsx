@@ -6,6 +6,7 @@ const HomePage = lazy(() => import("@/pages/home"));
 const AuthPage = lazy(() => import("@/pages/auth"));
 const Dashboard = lazy(() => import("@/pages/dashboard"));
 const Error = lazy(() => import("@/pages/error"));
+const CustomError = lazy(() => import("@/pages/error/CustomeError"));
 
 const routes = [
   {
@@ -16,11 +17,13 @@ const routes = [
   {
     path: "/auth",
     element: <AuthPage />,
+    errorElement: <CustomError />,
   },
   {
     path: "/dashboard",
     loader: tokenExpirationCheck,
     element: <Dashboard />,
+    errorElement: <CustomError />,
   },
 ];
 
