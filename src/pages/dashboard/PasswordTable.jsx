@@ -183,6 +183,7 @@ function PasswordTable({ searchQuery }) {
   ];
 
   const [globalFilter, setGlobalFilter] = useState(searchQuery || "");
+
   useEffect(() => {
     setGlobalFilter(searchQuery);
   }, [searchQuery]);
