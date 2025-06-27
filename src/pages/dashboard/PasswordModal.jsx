@@ -5,6 +5,7 @@ import { addPasswordAPI, deletePasswordAPI, editPasswordAPI } from "@/api";
 import { useToast } from "@/hooks/use-toast";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
+import { generatePassword } from "@/utils/generatePassword";
 import SmallLoader from "@/components/custom/small-loader";
 
 //icon imports
@@ -39,7 +40,6 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { generatePassword } from "@/utils/generatePassword";
 
 const PasswordModal = forwardRef(
   ({ data, setData, deleteFlag, addFlag, editFlag }, ref) => {
@@ -166,6 +166,11 @@ const PasswordModal = forwardRef(
     const closeModal = () => {
       if (data) setData({ websiteName: "", email: "", password: "" });
       dialogueCloseTriggerRef.current.click();
+    };
+
+    const closeDrawer = () => {
+      if (data) setData({ websiteName: "", email: "", password: "" });
+      setIsDrawerOpen((prev) => !prev);
     };
 
     return isDesktop ? (
@@ -526,7 +531,7 @@ const PasswordModal = forwardRef(
             className="my-5 w-32 mx-auto"
             variant="secondary"
             ref={closeDrawerTriggerRef}
-            onClick={() => setIsDrawerOpen((prev) => !prev)}
+            onClick={closeDrawer}
           >
             Cancel
           </Button>
