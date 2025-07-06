@@ -28,6 +28,7 @@ import {
 
 //shadcn UI imports
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -59,6 +60,8 @@ function PasswordTable({ searchQuery }) {
     staleTime: 1000 * 60 * 5, // staleTime means the time after which the data is considered old and a new request is made
     gcTime: 1000 * 60 * 10, // gcTime means the time after which the data from the cache is removed
   });
+
+  // console.log(data);
 
   if (error) {
     const errorMessage = error.response.data.message;
@@ -208,8 +211,8 @@ function PasswordTable({ searchQuery }) {
   });
 
   const filteredRows = table.getRowModel().rows;
-
-  return (
+  console.log(data);
+  return data.data?.length > 0 ? (
     <>
       <Table>
         <TableHeader>
@@ -295,6 +298,10 @@ function PasswordTable({ searchQuery }) {
         deleteFlag={rowId}
       />
     </>
+  ) : (
+    <div className="flex items-center justify-center h-[calc(100vh-250px)]">
+      <Skeleton className="w-full h-full" />
+    </div>
   );
 }
 
